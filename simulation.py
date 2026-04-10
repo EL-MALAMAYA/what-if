@@ -2,18 +2,10 @@ import os
 import json
 
 from dotenv import load_dotenv
-from langchain_openai import ChatOpenAI
-from crewai import Agent, Task, Crew, Process
 
 from prompts import get_continent_prompt, SYNTHESIZER_DIRECTOR_PROMPT
 
 load_dotenv()
-
-llm = ChatOpenAI(
-    model="ZAI: GLM-5.1",
-    base_url=os.getenv("GMI_ENDPOINT_URL"),
-    api_key=os.getenv("GMI_API_KEY"),
-)
 
 CONTINENT_NAMES = [
     "North America",
@@ -24,27 +16,70 @@ CONTINENT_NAMES = [
     "Oceania",
 ]
 
-continent_agents = {
-    name: Agent(
-        role=f"{name} Regional Council",
-        goal=f"React to global scenarios as the unified voice of {name}, citing constituent nations.",
-        backstory=get_continent_prompt(name),
+_crew_cache: dict = {}
+
+
+def _get_missing_vars() -> list[str]:
+    missing = []
+    if not os.getenv("GMI_API_KEY"):
+        missing.append("GMI_API_KEY")
+    if not os.getenv("GMI_ENDPOINT_URL"):
+        missing.append("GMI_ENDPOINT_URL")
+    return missing
+
+
+def _build_crew():
+    if _crew_cache:
+        return _crew_cache["continent_agents"], _crew_cache["director_agent"]
+
+    from langchain_openai import ChatOpenAI
+    from crewai import Agent
+
+    llm = ChatOpenAI(
+        model="ZAI: GLM-5.1",
+        base_url=os.getenv("GMI_ENDPOINT_URL"),
+        api_key=os.getenv("GMI_API_KEY"),
+    )
+
+    continent_agents = {
+        name: Agent(
+            role=f"{name} Regional Council",
+            goal=f"React to global scenarios as the unified voice of {name}, citing constituent nations.",
+            backstory=get_continent_prompt(name),
+            llm=llm,
+            verbose=False,
+        )
+        for name in CONTINENT_NAMES
+    }
+
+    director_agent = Agent(
+        role="Synthesizer Director",
+        goal="Synthesize all continental reactions into a single analytical JSON brief.",
+        backstory=SYNTHESIZER_DIRECTOR_PROMPT,
         llm=llm,
         verbose=False,
     )
-    for name in CONTINENT_NAMES
-}
 
-director_agent = Agent(
-    role="Synthesizer Director",
-    goal="Synthesize all continental reactions into a single analytical JSON brief.",
-    backstory=SYNTHESIZER_DIRECTOR_PROMPT,
-    llm=llm,
-    verbose=False,
-)
+    _crew_cache["continent_agents"] = continent_agents
+    _crew_cache["director_agent"] = director_agent
+    return continent_agents, director_agent
 
 
 def run_simulation(user_scenario: str) -> dict:
+    from crewai import Task, Crew, Process
+
+    missing = _get_missing_vars()
+    if missing:
+        return {
+            "prediction": "Simulation unavailable — missing environment variables.",
+            "report": f"The following variables are not set: {', '.join(missing)}. "
+                      "Please configure them in your hosting dashboard or .env file.",
+            "probability": 0,
+            "links": [],
+        }
+
+    continent_agents, director_agent = _build_crew()
+
     continent_tasks = []
     for name in CONTINENT_NAMES:
         task = Task(

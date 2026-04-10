@@ -1,8 +1,12 @@
+import os
 import json
 from pathlib import Path
 
+from dotenv import load_dotenv
 import streamlit as st
-from simulation import run_simulation
+from simulation import run_simulation, _get_missing_vars
+
+load_dotenv()
 
 _PROFILES_PATH = Path(__file__).parent / "profiles.json"
 with open(_PROFILES_PATH, "r", encoding="utf-8") as _f:
@@ -292,6 +296,31 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+# ── Environment check ────────────────────────────────────────────────────────────
+_missing = _get_missing_vars()
+if _missing:
+    st.markdown(
+        f"""
+        <div class="card" style="border-color:var(--accent-amber)">
+            <div class="card-label" style="color:var(--accent-amber)">Configuration Required</div>
+            <div style="color:var(--text-primary);font-size:1rem;font-weight:600;margin-bottom:.5rem">
+                Missing environment variable{'s' if len(_missing) > 1 else ''}:
+                <code style="color:var(--accent-red)">{', '.join(_missing)}</code>
+            </div>
+            <div style="color:var(--text-secondary);font-size:.9rem;line-height:1.6">
+                The simulation engine cannot connect to the GMI Cloud endpoint without these credentials.
+                <br>Please set them in one of the following locations:
+                <ul style="margin-top:.4rem">
+                    <li>Your hosting platform's environment / secrets dashboard (Streamlit Cloud, Railway, etc.)</li>
+                    <li>A <code>.env</code> file in the project root for local development</li>
+                </ul>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+    st.stop()
 
 # ── Input ────────────────────────────────────────────────────────────────────────
 scenario = st.text_area(
