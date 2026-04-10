@@ -19,12 +19,20 @@ CONTINENT_NAMES = [
 _crew_cache: dict = {}
 
 
+def _clean_secret(value: str | None) -> str:
+    """Normalize env/ui secrets to avoid hidden formatting issues."""
+    if not value:
+        return ""
+    # Strip whitespace and optional wrapping quotes copied from dashboards.
+    return value.strip().strip("'").strip('"')
+
+
 def _crew_config_key(provider: str, claude_api_key: str | None = None) -> tuple:
     """Invalidate cached Crew when provider/config changes."""
     if provider == "claude":
         return (
             provider,
-            claude_api_key or os.getenv("CLAUDE_API_KEY", ""),
+            _clean_secret(claude_api_key or os.getenv("CLAUDE_API_KEY", "")),
             os.getenv("CLAUDE_MODEL", ""),
             os.getenv("GMI_TIMEOUT", ""),
             os.getenv("GMI_MAX_RETRIES", ""),
@@ -76,7 +84,7 @@ def _llm_generation_kwargs() -> dict:
 def _get_missing_vars(provider: str = "gmi", claude_api_key: str | None = None) -> list[str]:
     missing = []
     if provider == "claude":
-        if not (claude_api_key or os.getenv("CLAUDE_API_KEY")):
+        if not _clean_secret(claude_api_key or os.getenv("CLAUDE_API_KEY")):
             missing.append("CLAUDE_API_KEY")
         return missing
     if not os.getenv("GMI_API_KEY"):
@@ -97,7 +105,7 @@ def _build_crew(provider: str = "gmi", claude_api_key: str | None = None):
     _gen = _llm_generation_kwargs()
 
     if provider == "claude":
-        _api_key = claude_api_key or os.getenv("CLAUDE_API_KEY", "")
+        _api_key = _clean_secret(claude_api_key or os.getenv("CLAUDE_API_KEY", ""))
         _model = os.getenv("CLAUDE_MODEL", "claude-3-5-sonnet-latest")
         llm = LLM(
             model=_model,
@@ -240,11 +248,19 @@ def run_simulation(
     except Exception as e:
         err = str(e)
         if provider == "claude":
+            auth_hint = ""
+            if "authentication_error" in err.lower() or "invalid authentication credentials" in err.lower():
+                auth_hint = (
+                    " Your Claude key appears invalid/revoked for this deployment environment. "
+                    "Generate a new Anthropic API key, update CLAUDE_API_KEY in Railway/hosting variables, "
+                    "then redeploy."
+                )
             hint = (
                 " Confirm CLAUDE_API_KEY is valid and CLAUDE_MODEL is supported by your Anthropic account. "
                 "You can also try a different model (e.g. claude-3-5-sonnet-latest). "
                 "If the error mentions 'Anthropic native provider not available', install Anthropic extras "
                 "for CrewAI (e.g. `pip install \"crewai[anthropic]\"`), then redeploy."
+                f"{auth_hint}"
             )
         else:
             hint = (
