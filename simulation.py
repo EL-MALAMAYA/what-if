@@ -26,7 +26,22 @@ def _crew_config_key() -> tuple:
         os.getenv("GMI_ENDPOINT_URL", ""),
         os.getenv("GMI_MODEL", ""),
         os.getenv("GMI_USE_JSON_RESPONSE_FORMAT", "").lower(),
+        os.getenv("GMI_TIMEOUT", ""),
+        os.getenv("GMI_MAX_RETRIES", ""),
     )
+
+
+def _llm_client_kwargs() -> dict:
+    """Longer timeout + more retries for slow reasoning models (e.g. DeepSeek-R1) and flaky gateways."""
+    try:
+        timeout = float(os.getenv("GMI_TIMEOUT", "180"))
+    except ValueError:
+        timeout = 180.0
+    try:
+        max_retries = int(os.getenv("GMI_MAX_RETRIES", "6"))
+    except ValueError:
+        max_retries = 6
+    return {"timeout": timeout, "max_retries": max(0, max_retries)}
 
 
 def _get_missing_vars() -> list[str]:
@@ -57,11 +72,14 @@ def _build_crew():
         "yes",
     )
 
+    _client = _llm_client_kwargs()
+
     llm = LLM(
         model=_model,
         provider="openai",
         base_url=_base_url,
         api_key=_api_key,
+        **_client,
     )
 
     director_kwargs = {
@@ -69,6 +87,7 @@ def _build_crew():
         "provider": "openai",
         "base_url": _base_url,
         "api_key": _api_key,
+        **_client,
     }
     if _json_mode:
         director_kwargs["response_format"] = {"type": "json_object"}
@@ -161,12 +180,15 @@ def run_simulation(user_scenario: str) -> dict:
     except Exception as e:
         err = str(e)
         hint = (
-            " Confirm GMI_MODEL matches an id from your endpoint's /v1/models list. "
-            "If errors persist, leave GMI_USE_JSON_RESPONSE_FORMAT unset (default)."
+            " Confirm GMI_MODEL matches an id from GET /v1/models. "
+            "Leave GMI_USE_JSON_RESPONSE_FORMAT unset unless your model supports JSON mode. "
+            "If you see max_retries_exceeded or status 523, the upstream model may be overloaded or too slow: "
+            "raise GMI_TIMEOUT (e.g. 300) and GMI_MAX_RETRIES (e.g. 8), or switch to a faster model "
+            "such as deepseek-ai/DeepSeek-V3."
         )
         return {
             "prediction": "Simulation failed — LLM request was rejected.",
-            "report": f"{err}{hint}",
+            "report": f"{err}\n\n{hint}",
             "probability": 0,
             "links": [],
         }

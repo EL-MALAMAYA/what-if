@@ -11,14 +11,30 @@ from simulation import run_simulation, _get_missing_vars
 load_dotenv()
 
 _ROOT = Path(__file__).resolve().parent
-_LOGO_PATH = _ROOT / "assets" / "logo.png"
+_LOGO_SVG = _ROOT / "assets" / "logo.svg"
+_LOGO_PNG = _ROOT / "assets" / "logo.png"
 _PROFILES_PATH = _ROOT / "profiles.json"
 
 
+def _logo_asset_path() -> Path | None:
+    if _LOGO_SVG.is_file():
+        return _LOGO_SVG
+    if _LOGO_PNG.is_file():
+        return _LOGO_PNG
+    return None
+
+
 def _logo_data_uri() -> str | None:
-    if not _LOGO_PATH.is_file():
+    path = _logo_asset_path()
+    if path is None:
         return None
-    return "data:image/png;base64," + base64.b64encode(_LOGO_PATH.read_bytes()).decode()
+    raw = path.read_bytes()
+    b64 = base64.b64encode(raw).decode()
+    if path.suffix.lower() == ".svg":
+        return f"data:image/svg+xml;base64,{b64}"
+    return f"data:image/png;base64,{b64}"
+
+
 with open(_PROFILES_PATH, "r", encoding="utf-8") as _f:
     _raw = json.load(_f)
 
@@ -31,7 +47,7 @@ for _c in countries_list:
 
 st.set_page_config(
     page_title="What If: Global Consequence Engine",
-    page_icon=str(_LOGO_PATH) if _LOGO_PATH.is_file() else "🌐",
+    page_icon=str(_p) if (_p := _logo_asset_path()) else "🌐",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
