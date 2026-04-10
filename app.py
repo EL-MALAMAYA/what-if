@@ -1,5 +1,6 @@
-import os
+import base64
 import json
+import os
 from pathlib import Path
 from textwrap import dedent
 
@@ -9,7 +10,15 @@ from simulation import run_simulation, _get_missing_vars
 
 load_dotenv()
 
-_PROFILES_PATH = Path(__file__).parent / "profiles.json"
+_ROOT = Path(__file__).resolve().parent
+_LOGO_PATH = _ROOT / "assets" / "logo.png"
+_PROFILES_PATH = _ROOT / "profiles.json"
+
+
+def _logo_data_uri() -> str | None:
+    if not _LOGO_PATH.is_file():
+        return None
+    return "data:image/png;base64," + base64.b64encode(_LOGO_PATH.read_bytes()).decode()
 with open(_PROFILES_PATH, "r", encoding="utf-8") as _f:
     _raw = json.load(_f)
 
@@ -22,7 +31,7 @@ for _c in countries_list:
 
 st.set_page_config(
     page_title="What If: Global Consequence Engine",
-    page_icon="🌐",
+    page_icon=str(_LOGO_PATH) if _LOGO_PATH.is_file() else "🌐",
     layout="wide",
     initial_sidebar_state="collapsed",
 )
@@ -140,10 +149,24 @@ st.html(
         padding-bottom: .4rem;
     }
 
-    /* ===== HEADER ===== */
+    /* ===== HEADER / BRAND ===== */
+    .brand-bar {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 1.25rem;
+        flex-wrap: wrap;
+        padding: 1.75rem 0 1rem;
+    }
+    .brand-bar .brand-logo-img {
+        height: 76px;
+        width: auto;
+        display: block;
+        flex-shrink: 0;
+    }
     .dash-header {
         text-align: center;
-        padding: 2rem 0 1rem;
+        padding: 0 0 1rem;
     }
     .dash-header .tag {
         display: inline-block;
@@ -505,12 +528,21 @@ def _threat_color(probability: int) -> tuple[str, str]:
 
 
 # ── Header ──────────────────────────────────────────────────────────────────────
+_logo_uri = _logo_data_uri()
+_logo_html = (
+    f'<img class="brand-logo-img" src="{_logo_uri}" alt="What-If.Live — Geo-politics simulator" />'
+    if _logo_uri
+    else ""
+)
 st.markdown(
-    """
-    <div class="dash-header">
-        <div class="tag"><i class="icon-radar" style="font-size:.75rem;margin-right:.3rem"></i>Multi-Agent Geopolitical Intelligence</div>
-        <h1>What If: Global Consequence Engine</h1>
-        <p class="sub">Pose a hypothetical scenario. Six continental AI analysts react. A director synthesizes the fallout.</p>
+    f"""
+    <div class="brand-bar">
+        {_logo_html}
+        <div class="dash-header">
+            <div class="tag"><i class="icon-radar" style="font-size:.75rem;margin-right:.3rem"></i>Multi-Agent Geopolitical Intelligence</div>
+            <h1>What If: Global Consequence Engine</h1>
+            <p class="sub">Pose a hypothetical scenario. Six continental AI analysts react. A director synthesizes the fallout.</p>
+        </div>
     </div>
     """,
     unsafe_allow_html=True,
