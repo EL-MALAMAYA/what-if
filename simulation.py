@@ -19,6 +19,16 @@ CONTINENT_NAMES = [
 _crew_cache: dict = {}
 
 
+def _crew_config_key() -> tuple:
+    """Invalidate cached Crew when model, endpoint, or JSON-mode settings change."""
+    return (
+        os.getenv("GMI_API_KEY", ""),
+        os.getenv("GMI_ENDPOINT_URL", ""),
+        os.getenv("GMI_MODEL", ""),
+        os.getenv("GMI_USE_JSON_RESPONSE_FORMAT", "").lower(),
+    )
+
+
 def _get_missing_vars() -> list[str]:
     missing = []
     if not os.getenv("GMI_API_KEY"):
@@ -29,28 +39,41 @@ def _get_missing_vars() -> list[str]:
 
 
 def _build_crew():
-    if _crew_cache:
+    cfg = _crew_config_key()
+    if _crew_cache.get("config_key") == cfg and "continent_agents" in _crew_cache:
         return _crew_cache["continent_agents"], _crew_cache["director_agent"]
 
     from crewai import Agent, LLM
 
     _api_key = os.getenv("GMI_API_KEY", "")
     _base_url = os.getenv("GMI_ENDPOINT_URL", "")
+    # Must match the model id from GET {GMI_ENDPOINT_URL}/models (GMI Cloud Inference Engine).
+    _model = os.getenv("GMI_MODEL", "deepseek-ai/DeepSeek-R1")
+    # Many OpenAI-compatible models (including some DeepSeek deployments) return HTTP 400 if
+    # response_format=json_object is sent. Enable only for models that support it (e.g. some GLM/GPT).
+    _json_mode = os.getenv("GMI_USE_JSON_RESPONSE_FORMAT", "").lower() in (
+        "1",
+        "true",
+        "yes",
+    )
 
     llm = LLM(
-        model="zai-org/GLM-5.1-FP8",
+        model=_model,
         provider="openai",
         base_url=_base_url,
         api_key=_api_key,
     )
 
-    director_llm = LLM(
-        model="zai-org/GLM-5.1-FP8",
-        provider="openai",
-        base_url=_base_url,
-        api_key=_api_key,
-        response_format={"type": "json_object"},
-    )
+    director_kwargs = {
+        "model": _model,
+        "provider": "openai",
+        "base_url": _base_url,
+        "api_key": _api_key,
+    }
+    if _json_mode:
+        director_kwargs["response_format"] = {"type": "json_object"}
+
+    director_llm = LLM(**director_kwargs)
 
     continent_agents = {
         name: Agent(
@@ -71,6 +94,7 @@ def _build_crew():
         verbose=False,
     )
 
+    _crew_cache["config_key"] = cfg
     _crew_cache["continent_agents"] = continent_agents
     _crew_cache["director_agent"] = director_agent
     return continent_agents, director_agent
@@ -131,8 +155,21 @@ def run_simulation(user_scenario: str) -> dict:
         verbose=False,
     )
 
-    result = crew.kickoff()
-    raw_output = result.raw
+    try:
+        result = crew.kickoff()
+        raw_output = result.raw
+    except Exception as e:
+        err = str(e)
+        hint = (
+            " Confirm GMI_MODEL matches an id from your endpoint's /v1/models list. "
+            "If errors persist, leave GMI_USE_JSON_RESPONSE_FORMAT unset (default)."
+        )
+        return {
+            "prediction": "Simulation failed — LLM request was rejected.",
+            "report": f"{err}{hint}",
+            "probability": 0,
+            "links": [],
+        }
 
     try:
         return json.loads(raw_output)
