@@ -34,15 +34,21 @@ def _build_crew():
 
     from crewai import Agent, LLM
 
-    os.environ["OPENAI_API_KEY"] = os.getenv("GMI_API_KEY", "")
-    os.environ["OPENAI_BASE_URL"] = os.getenv("GMI_ENDPOINT_URL", "")
+    _api_key = os.getenv("GMI_API_KEY", "")
+    _base_url = os.getenv("GMI_ENDPOINT_URL", "")
 
     llm = LLM(
-        model="openai/ZAI: GLM-5.1",
+        model="zai-org/GLM-5.1-FP8",
+        provider="openai",
+        base_url=_base_url,
+        api_key=_api_key,
     )
 
     director_llm = LLM(
-        model="openai/ZAI: GLM-5.1",
+        model="zai-org/GLM-5.1-FP8",
+        provider="openai",
+        base_url=_base_url,
+        api_key=_api_key,
         response_format={"type": "json_object"},
     )
 
