@@ -98,7 +98,7 @@ def _build_crew(provider: str = "gmi", claude_api_key: str | None = None):
 
     if provider == "claude":
         _api_key = claude_api_key or os.getenv("CLAUDE_API_KEY", "")
-        _model = os.getenv("CLAUDE_MODEL", "claude-3-5-sonnet-20241022")
+        _model = os.getenv("CLAUDE_MODEL", "claude-3-5-sonnet-latest")
         llm = LLM(
             model=_model,
             provider="anthropic",
@@ -242,7 +242,7 @@ def run_simulation(
         if provider == "claude":
             hint = (
                 " Confirm CLAUDE_API_KEY is valid and CLAUDE_MODEL is supported by your Anthropic account. "
-                "You can also try a different model (e.g. claude-3-5-sonnet-20241022). "
+                "You can also try a different model (e.g. claude-3-5-sonnet-latest). "
                 "If the error mentions 'Anthropic native provider not available', install Anthropic extras "
                 "for CrewAI (e.g. `pip install \"crewai[anthropic]\"`), then redeploy."
             )
