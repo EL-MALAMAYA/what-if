@@ -407,6 +407,7 @@ RELATION_BADGES = {
     "economic_partner": ("\U0001F4B1", "#3b82f6"),
     "hostile": ("\U000026A0\uFE0F", "#ef4444"),
     "neutral": ("\U00002796", "#64748b"),
+    "strategic_competitor": ("\U00002694\uFE0F", "#f97316"),
 }
 
 with st.sidebar:
@@ -427,10 +428,17 @@ with st.sidebar:
         with st.expander(f"{icon}  {continent}  ({len(members)})", expanded=False):
             for c in members:
                 leader = c["leader"]
+                _ds = c["decision_style"]
+                if isinstance(_ds, dict):
+                    _ds_display = ", ".join(
+                        f"{k.replace('_', ' ')}: {v}" for k, v in _ds.items()
+                    )
+                else:
+                    _ds_display = str(_ds)
                 st.markdown(f"**{c['country']}** — {leader['name']}, *{leader['title']}*")
                 st.markdown(
                     f"<span style='color:#94a3b8;font-size:.84rem'>"
-                    f"<b>Decision style:</b> {c['decision_style']}</span>",
+                    f"<b>Decision style:</b> {_ds_display}</span>",
                     unsafe_allow_html=True,
                 )
 
@@ -449,7 +457,7 @@ with st.sidebar:
                 red_lines_md = "".join(
                     f"<li style='color:#ef4444;font-size:.8rem'>"
                     f"<i class='icon-shield-alert' style='font-size:.7rem;margin-right:.3rem;opacity:.7'></i>{rl}</li>"
-                    for rl in c["red_lines"]
+                    for rl in c.get("red_lines") or []
                 )
                 st.markdown(
                     f"<div style='font-size:.7rem;font-weight:600;color:#ef4444;"

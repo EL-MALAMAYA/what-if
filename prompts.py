@@ -13,23 +13,66 @@ for _c in COUNTRIES:
     _COUNTRIES_BY_REGION.setdefault(_c["region"], []).append(_c)
 
 
+def _event_impact_line(e: dict) -> str:
+    if e.get("impact"):
+        return str(e["impact"])
+    lvl = e.get("impact_level")
+    return f"impact_level={lvl}" if lvl else "n/a"
+
+
+def _format_official_statements(items: list) -> str:
+    parts = []
+    for s in items:
+        if isinstance(s, str):
+            parts.append(s)
+        else:
+            src = s.get("source", "")
+            tone = s.get("tone", "")
+            content = s.get("content", "")
+            parts.append(f"{src} ({tone}): {content}")
+    return " | ".join(parts)
+
+
+def _format_decision_style(ds: str | dict) -> str:
+    if isinstance(ds, str):
+        return ds
+    return "; ".join(f"{k.replace('_', ' ')}: {v}" for k, v in ds.items())
+
+
 def _format_country_profile(country: dict) -> str:
     leader = country["leader"]
-    red_lines = "; ".join(country["red_lines"])
+    red_lines = "; ".join(country.get("red_lines") or [])
     core = "; ".join(country["core_interests"])
     events = " | ".join(
-        f"{e['event']} ({e['type']}, impact: {e['impact']})"
+        f"{e['event']} ({e['type']}, {_event_impact_line(e)})"
         for e in country["recent_events"]
     )
-    statements = " | ".join(country["official_statements"])
+    statements = _format_official_statements(country["official_statements"])
+    dstyle = _format_decision_style(country["decision_style"])
+
+    allies = ", ".join(country.get("alliances") or [])
+    enemies = ", ".join(country.get("enemies") or [])
+    neutral = ", ".join(country.get("neutral_relations") or [])
+    tri = []
+    if allies:
+        tri.append(f"allies: {allies}")
+    if enemies:
+        tri.append(f"adversaries: {enemies}")
+    if neutral:
+        tri.append(f"other neutrals/partners: {neutral}")
+    tri_line = ("; ".join(tri)) if tri else ""
+
+    extra = ""
+    if tri_line:
+        extra = f"\n    Stated relations: {tri_line}"
 
     return (
         f"  {country['country']} — Leader: {leader['name']} ({leader['title']})\n"
         f"    Core interests: {core}\n"
-        f"    Red lines: [{red_lines}]\n"
+        f"    Red lines: [{red_lines}]{extra}\n"
         f"    Recent events: {events}\n"
         f"    Official stance: {statements}\n"
-        f"    Decision style: {country['decision_style']}"
+        f"    Decision style: {dstyle}"
     )
 
 
