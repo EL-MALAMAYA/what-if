@@ -28,6 +28,8 @@ def _crew_config_key() -> tuple:
         os.getenv("GMI_USE_JSON_RESPONSE_FORMAT", "").lower(),
         os.getenv("GMI_TIMEOUT", ""),
         os.getenv("GMI_MAX_RETRIES", ""),
+        os.getenv("GMI_MAX_TOKENS", ""),
+        os.getenv("GMI_TEMPERATURE", ""),
     )
 
 
@@ -42,6 +44,22 @@ def _llm_client_kwargs() -> dict:
     except ValueError:
         max_retries = 6
     return {"timeout": timeout, "max_retries": max(0, max_retries)}
+
+
+def _llm_generation_kwargs() -> dict:
+    """Keep generation compact to reduce long-running websocket sessions."""
+    try:
+        max_tokens = int(os.getenv("GMI_MAX_TOKENS", "700"))
+    except ValueError:
+        max_tokens = 700
+    try:
+        temperature = float(os.getenv("GMI_TEMPERATURE", "0.2"))
+    except ValueError:
+        temperature = 0.2
+    return {
+        "max_tokens": max(128, max_tokens),
+        "temperature": min(1.0, max(0.0, temperature)),
+    }
 
 
 def _get_missing_vars() -> list[str]:
@@ -73,6 +91,7 @@ def _build_crew():
     )
 
     _client = _llm_client_kwargs()
+    _gen = _llm_generation_kwargs()
 
     llm = LLM(
         model=_model,
@@ -80,6 +99,7 @@ def _build_crew():
         base_url=_base_url,
         api_key=_api_key,
         **_client,
+        **_gen,
     )
 
     director_kwargs = {
@@ -88,6 +108,7 @@ def _build_crew():
         "base_url": _base_url,
         "api_key": _api_key,
         **_client,
+        **_gen,
     }
     if _json_mode:
         director_kwargs["response_format"] = {"type": "json_object"}
@@ -141,11 +162,11 @@ def run_simulation(user_scenario: str) -> dict:
                 f"The user has posed the following global 'What If' scenario:\n\n"
                 f"\"{user_scenario}\"\n\n"
                 f"As the {name} Regional Council, provide your region's reaction "
-                f"in 2-3 paragraphs, explicitly citing how specific constituent "
+                f"in 2-3 short sentences, explicitly citing how specific constituent "
                 f"nations and their red lines influenced the consensus."
             ),
             expected_output=(
-                f"A 2-3 paragraph reaction from the {name} Regional Council, "
+                f"A concise 2-3 sentence reaction from the {name} Regional Council, "
                 f"referencing specific nations and their red lines."
             ),
             agent=continent_agents[name],
