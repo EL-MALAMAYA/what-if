@@ -1,124 +1,409 @@
 {
-  "North America": {
-    "USA": {
-      "personality": "A global hegemon prioritizing technological supremacy, dollar dominance, military deterrence, and the preservation of a US-led rules-based international order.",
+  "countries": [
+    {
+      "country": "USA",
+      "region": "North America",
+      "leader": { "name": "Joseph Biden", "title": "President" },
+      "core_interests": [
+        "Technological supremacy and AI leadership",
+        "US dollar reserve currency status",
+        "NATO alliance cohesion and military deterrence",
+        "Semiconductor supply chain control",
+        "Rules-based international order under US leadership"
+      ],
       "red_lines": [
         "Direct military threat to NATO allies or US overseas territories",
         "Displacement of the US dollar as the world's primary reserve currency",
         "A hostile power achieving semiconductor or AI superiority"
-      ]
+      ],
+      "recent_events": [
+        { "event": "CHIPS Act implementation accelerating domestic semiconductor production", "type": "economic", "impact": "Reduces reliance on Asian chip fabrication" },
+        { "event": "Expanded AUKUS technology-sharing agreement", "type": "military", "impact": "Deepens Indo-Pacific alliance architecture" },
+        { "event": "Tightened export controls on advanced AI chips to China", "type": "trade", "impact": "Escalates US-China tech decoupling" }
+      ],
+      "official_statements": [
+        "We will not allow any nation to surpass the United States in technology or military capability.",
+        "The transatlantic alliance remains the cornerstone of global security."
+      ],
+      "decision_style": "Assertive multilateralism backed by economic leverage and forward-deployed military presence."
     },
-    "Canada": {
-      "personality": "A multilateral middle power balancing deep economic integration with the US against an independent foreign policy rooted in climate leadership and Arctic sovereignty.",
+    {
+      "country": "Canada",
+      "region": "North America",
+      "leader": { "name": "Mark Carney", "title": "Prime Minister" },
+      "core_interests": [
+        "Arctic sovereignty and Northern passage control",
+        "Climate leadership and clean energy exports",
+        "Stable USMCA trade relationship",
+        "Multilateral diplomacy and UN peacekeeping"
+      ],
       "red_lines": [
         "Unilateral US trade actions that threaten Canadian resource exports",
         "Foreign encroachment on Arctic shipping routes or territorial waters"
-      ]
-    }
-  },
-  "South America": {
-    "Brazil": {
-      "personality": "A regional anchor seeking permanent UN Security Council membership while leveraging Amazon stewardship and agricultural exports for global influence.",
+      ],
+      "recent_events": [
+        { "event": "Critical minerals strategy to supply allied semiconductor supply chains", "type": "economic", "impact": "Positions Canada as key Western resource partner" },
+        { "event": "Arctic military infrastructure expansion", "type": "military", "impact": "Reinforces sovereignty claims against Russian and Chinese interest" }
+      ],
+      "official_statements": [
+        "Canada's Arctic is non-negotiable sovereign territory.",
+        "We stand with our allies while charting an independent path on climate."
+      ],
+      "decision_style": "Consensus-driven multilateralism with quiet but firm sovereignty enforcement."
+    },
+    {
+      "country": "Brazil",
+      "region": "South America",
+      "leader": { "name": "Luiz Inácio Lula da Silva", "title": "President" },
+      "core_interests": [
+        "Permanent UN Security Council seat",
+        "Amazon sovereignty and environmental stewardship",
+        "Agricultural export dominance",
+        "South-South cooperation and BRICS leadership"
+      ],
       "red_lines": [
         "International attempts to override Brazilian sovereignty over the Amazon",
         "Trade policies that undercut Brazilian agribusiness competitiveness"
-      ]
+      ],
+      "recent_events": [
+        { "event": "Hosted BRICS expansion summit strengthening Global South bloc", "type": "diplomatic", "impact": "Elevates Brazil as multipolar coalition leader" },
+        { "event": "Record soy and beef exports to China and Middle East", "type": "economic", "impact": "Deepens commodity-based trade dependencies" }
+      ],
+      "official_statements": [
+        "The Amazon is ours to protect — not the world's to govern.",
+        "Brazil will not accept a global order that excludes the voices of the developing world."
+      ],
+      "decision_style": "Pragmatic non-alignment leveraging commodity power and South-South solidarity."
     },
-    "Argentina": {
-      "personality": "A resource-rich nation focused on stabilizing its currency, restructuring sovereign debt, and expanding lithium and energy exports to regain economic credibility.",
+    {
+      "country": "Argentina",
+      "region": "South America",
+      "leader": { "name": "Javier Milei", "title": "President" },
+      "core_interests": [
+        "Currency stabilization and dollarization debate",
+        "Sovereign debt restructuring",
+        "Lithium Triangle resource monetization",
+        "Vaca Muerta energy development"
+      ],
       "red_lines": [
         "IMF conditionality that triggers domestic social unrest",
         "Foreign corporate control over critical lithium reserves in the Lithium Triangle"
-      ]
-    }
-  },
-  "Europe": {
-    "Germany": {
-      "personality": "The EU's industrial engine pursuing energy transition, fiscal discipline, and strategic autonomy while managing dependence on Chinese export markets.",
+      ],
+      "recent_events": [
+        { "event": "Aggressive deregulation and austerity program under libertarian government", "type": "economic", "impact": "Attracts foreign investment but deepens social polarization" },
+        { "event": "Lithium export agreements with US and EU battery manufacturers", "type": "trade", "impact": "Positions Argentina in global EV supply chain" }
+      ],
+      "official_statements": [
+        "Argentina's future lies in free markets and integration with the West.",
+        "Our lithium is a strategic asset — partnerships yes, surrender never."
+      ],
+      "decision_style": "Ideologically driven free-market shock therapy with Western alignment."
+    },
+    {
+      "country": "Germany",
+      "region": "Europe",
+      "leader": { "name": "Friedrich Merz", "title": "Chancellor" },
+      "core_interests": [
+        "Industrial competitiveness and Mittelstand protection",
+        "Energy transition (Energiewende)",
+        "EU fiscal discipline and cohesion",
+        "Strategic autonomy from both US and China dependency"
+      ],
       "red_lines": [
         "Disruption of critical supply chains for automotive and manufacturing sectors",
         "Erosion of EU regulatory sovereignty by external trade agreements"
-      ]
+      ],
+      "recent_events": [
+        { "event": "Major defense spending increase to meet NATO 2% GDP target", "type": "military", "impact": "Signals post-pacifist security posture shift" },
+        { "event": "Accelerated LNG terminal construction replacing Russian gas", "type": "energy", "impact": "Reduces energy vulnerability but increases costs" }
+      ],
+      "official_statements": [
+        "Europe must be able to defend itself — we cannot rely solely on others.",
+        "Our industrial base is the backbone of European prosperity and must be protected."
+      ],
+      "decision_style": "Deliberate, coalition-driven consensus-building with strong institutional anchoring."
     },
-    "France": {
-      "personality": "A nuclear-armed UN Security Council member championing European strategic autonomy, Francophone influence in Africa, and a strong EU defense identity.",
+    {
+      "country": "France",
+      "region": "Europe",
+      "leader": { "name": "Emmanuel Macron", "title": "President" },
+      "core_interests": [
+        "European strategic autonomy and EU defense identity",
+        "Francophone influence in West and Central Africa",
+        "Nuclear deterrence independence",
+        "EU regulatory and digital sovereignty"
+      ],
       "red_lines": [
         "Marginalization of French influence in West and Central Africa",
         "NATO decisions that bypass European consultation"
-      ]
-    }
-  },
-  "Africa": {
-    "Nigeria": {
-      "personality": "West Africa's largest economy leveraging its oil reserves and massive youth population to assert regional leadership through ECOWAS and the African Continental Free Trade Area.",
+      ],
+      "recent_events": [
+        { "event": "Military withdrawal from Niger and Sahel repositioning", "type": "military", "impact": "Forced recalibration of African security strategy" },
+        { "event": "Push for European AI sovereignty initiative", "type": "technology", "impact": "Challenges US Big Tech dominance in EU markets" }
+      ],
+      "official_statements": [
+        "Europe must not be a vassal of any power — we need our own strategic capacity.",
+        "France's nuclear deterrent protects all of Europe."
+      ],
+      "decision_style": "Presidentialist and visionary, favoring bold unilateral initiatives within multilateral frameworks."
+    },
+    {
+      "country": "Nigeria",
+      "region": "Africa",
+      "leader": { "name": "Bola Tinubu", "title": "President" },
+      "core_interests": [
+        "ECOWAS regional leadership",
+        "Oil revenue stabilization and refining capacity",
+        "Youth employment and digital economy growth",
+        "African Continental Free Trade Area (AfCFTA) implementation"
+      ],
       "red_lines": [
         "External military intervention in West African states without AU consent",
         "Oil market manipulation that destabilizes the Nigerian naira"
-      ]
+      ],
+      "recent_events": [
+        { "event": "Fuel subsidy removal and naira float triggering inflation", "type": "economic", "impact": "Short-term pain for long-term fiscal restructuring" },
+        { "event": "Dangote Refinery operational, reducing fuel import dependency", "type": "energy", "impact": "Transforms Nigeria from fuel importer to regional refiner" }
+      ],
+      "official_statements": [
+        "Africa's problems require African solutions — external interference is unwelcome.",
+        "Nigeria will lead the continent's economic integration through AfCFTA."
+      ],
+      "decision_style": "Pragmatic strongman governance balancing reform with patronage networks."
     },
-    "South Africa": {
-      "personality": "A BRICS member and continental diplomatic heavyweight advocating for debt relief, equitable vaccine access, and reform of global financial institutions.",
+    {
+      "country": "South Africa",
+      "region": "Africa",
+      "leader": { "name": "Cyril Ramaphosa", "title": "President" },
+      "core_interests": [
+        "BRICS membership and Global South advocacy",
+        "Critical mineral beneficiation (platinum, manganese, chromium)",
+        "Debt relief and reform of Bretton Woods institutions",
+        "Regional stability through SADC"
+      ],
       "red_lines": [
         "Western sanctions that target South African trade relationships with BRICS partners",
         "Exploitation of African critical minerals without local beneficiation requirements"
-      ]
-    }
-  },
-  "Asia": {
-    "China": {
-      "personality": "A rising superpower pursuing technological self-sufficiency, Belt and Road expansion, yuan internationalization, and the reunification of Taiwan under a one-China framework.",
+      ],
+      "recent_events": [
+        { "event": "Hosted BRICS summit expanding membership to Global South nations", "type": "diplomatic", "impact": "Strengthens alternative to Western-led institutions" },
+        { "event": "Load-shedding energy crisis driving renewable investment", "type": "energy", "impact": "Accelerates green transition out of necessity" }
+      ],
+      "official_statements": [
+        "The global financial architecture must reflect the world as it is, not as it was in 1945.",
+        "Our minerals will be processed on African soil for African benefit."
+      ],
+      "decision_style": "Cautious multilateral balancing act between Western and BRICS partnerships."
+    },
+    {
+      "country": "China",
+      "region": "Asia",
+      "leader": { "name": "Xi Jinping", "title": "President and General Secretary" },
+      "core_interests": [
+        "Technological self-sufficiency and Made in China 2025",
+        "Belt and Road Initiative expansion",
+        "Yuan internationalization",
+        "Taiwan reunification under one-China framework",
+        "South China Sea territorial consolidation"
+      ],
       "red_lines": [
         "Formal diplomatic recognition of Taiwanese independence by major powers",
         "US-led semiconductor export controls that threaten Chinese tech advancement",
         "Military alliance encirclement in the South China Sea or Taiwan Strait"
-      ]
+      ],
+      "recent_events": [
+        { "event": "Breakthrough in domestic EUV lithography reducing ASML dependency", "type": "technology", "impact": "Accelerates semiconductor self-sufficiency timeline" },
+        { "event": "Expanded naval exercises around Taiwan and in South China Sea", "type": "military", "impact": "Signals escalating pressure on reunification timeline" },
+        { "event": "Yuan-denominated oil trade agreements with Saudi Arabia and Iran", "type": "economic", "impact": "Challenges petrodollar system" }
+      ],
+      "official_statements": [
+        "Taiwan is an internal affair of China — no external force will change this reality.",
+        "China seeks peaceful development but will defend its core interests without hesitation."
+      ],
+      "decision_style": "Centralized, long-horizon strategic planning with calculated risk escalation."
     },
-    "Singapore": {
-      "personality": "A strategically neutral city-state serving as ASEAN's financial hub, balancing deep trade ties with both the US and China while safeguarding maritime freedom in the Strait of Malacca.",
+    {
+      "country": "Singapore",
+      "region": "Asia",
+      "leader": { "name": "Lawrence Wong", "title": "Prime Minister" },
+      "core_interests": [
+        "ASEAN centrality and strategic neutrality",
+        "Strait of Malacca maritime freedom",
+        "Financial hub status and capital flows",
+        "Balanced US-China engagement"
+      ],
       "red_lines": [
         "Militarization of the Strait of Malacca by any external power",
         "Coercion to choose sides in the US-China rivalry that undermines ASEAN centrality"
-      ]
+      ],
+      "recent_events": [
+        { "event": "Expanded bilateral defense agreements with both US and China", "type": "diplomatic", "impact": "Maintains strategic equidistance" },
+        { "event": "Became top ASEAN destination for semiconductor packaging investment", "type": "economic", "impact": "Benefits from supply chain diversification away from China" }
+      ],
+      "official_statements": [
+        "Small states survive by making themselves relevant to all, captive to none.",
+        "ASEAN centrality is not a slogan — it is our survival strategy."
+      ],
+      "decision_style": "Technocratic pragmatism with meticulous risk management and quiet diplomacy."
     },
-    "The Philippines": {
-      "personality": "A treaty ally of the United States asserting sovereignty over contested South China Sea territories while managing economic dependence on Chinese trade and infrastructure investment.",
+    {
+      "country": "The Philippines",
+      "region": "Asia",
+      "leader": { "name": "Ferdinand Marcos Jr.", "title": "President" },
+      "core_interests": [
+        "South China Sea sovereignty (West Philippine Sea)",
+        "US Mutual Defense Treaty guarantees",
+        "Overseas Filipino Worker (OFW) remittance protection",
+        "Infrastructure modernization through diversified partnerships"
+      ],
       "red_lines": [
         "Chinese occupation or construction on Philippine-claimed reefs and shoals",
         "Withdrawal of US security guarantees under the Mutual Defense Treaty",
         "Economic coercion that threatens Filipino overseas worker remittances"
-      ]
+      ],
+      "recent_events": [
+        { "event": "Expanded EDCA bases granting US military broader access", "type": "military", "impact": "Deepens US alliance but provokes Chinese countermeasures" },
+        { "event": "Confrontations with Chinese coast guard at Second Thomas Shoal", "type": "security", "impact": "Internationalizes South China Sea dispute" }
+      ],
+      "official_statements": [
+        "We will defend every square inch of our territory in the West Philippine Sea.",
+        "Our alliance with the United States is ironclad and non-negotiable."
+      ],
+      "decision_style": "Alliance-dependent assertiveness with domestic populist considerations."
     },
-    "Japan": {
-      "personality": "An advanced industrial democracy expanding its defense posture, deepening the US-Japan alliance, and competing for semiconductor leadership while managing demographic decline.",
+    {
+      "country": "Japan",
+      "region": "Asia",
+      "leader": { "name": "Shigeru Ishiba", "title": "Prime Minister" },
+      "core_interests": [
+        "US-Japan alliance deepening",
+        "Semiconductor industry leadership",
+        "Constitutional reinterpretation for expanded defense",
+        "Energy import security",
+        "Demographic decline management"
+      ],
       "red_lines": [
         "A nuclear or ballistic missile provocation from North Korea targeting Japanese territory",
         "Unilateral changes to the status quo in the Taiwan Strait that threaten regional stability",
         "Trade restrictions that cut off Japanese access to critical energy imports"
-      ]
+      ],
+      "recent_events": [
+        { "event": "Record defense budget with counterstrike capability acquisition", "type": "military", "impact": "Largest post-WWII military posture shift" },
+        { "event": "TSMC and Rapidus semiconductor fab construction in Kumamoto and Hokkaido", "type": "technology", "impact": "Rebuilds domestic chip manufacturing capacity" }
+      ],
+      "official_statements": [
+        "A Taiwan contingency is a Japan contingency — we cannot be passive observers.",
+        "Japan will take responsibility for its own defense while strengthening our alliance."
+      ],
+      "decision_style": "Cautious incrementalism with alliance-first security orientation."
     },
-    "Iran": {
-      "personality": "A theocratic regional power projecting influence through proxy networks across the Middle East while pursuing nuclear latency and resisting Western sanctions regimes.",
+    {
+      "country": "Iran",
+      "region": "Asia",
+      "leader": { "name": "Masoud Pezeshkian", "title": "President" },
+      "core_interests": [
+        "Nuclear program latency and sanctions relief",
+        "Regional influence through proxy networks (Hezbollah, Houthis, Iraqi militias)",
+        "Oil export diversification to China and India",
+        "Resistance to Western-imposed regime change"
+      ],
       "red_lines": [
         "Military strikes on Iranian nuclear facilities by Israel or the US",
         "Regime-change operations or support for domestic separatist movements",
         "Sanctions escalation that completely severs Iranian oil exports to China and India"
-      ]
-    }
-  },
-  "Oceania": {
-    "Australia": {
-      "personality": "A US-allied middle power balancing AUKUS security commitments with deep economic dependence on Chinese commodity demand while championing Pacific Island climate resilience.",
+      ],
+      "recent_events": [
+        { "event": "Uranium enrichment approaching weapons-grade threshold", "type": "nuclear", "impact": "Triggers international alarm and Israeli contingency planning" },
+        { "event": "Deepened military cooperation with Russia including drone transfers", "type": "military", "impact": "Strengthens anti-Western axis but invites further sanctions" }
+      ],
+      "official_statements": [
+        "Iran's nuclear program is a sovereign right — no nation may dictate our energy future.",
+        "The resistance axis will endure regardless of Western pressure."
+      ],
+      "decision_style": "Theocratic-strategic hybrid with Supreme Leader final authority and calculated brinksmanship."
+    },
+    {
+      "country": "Australia",
+      "region": "Oceania",
+      "leader": { "name": "Anthony Albanese", "title": "Prime Minister" },
+      "core_interests": [
+        "AUKUS nuclear submarine program",
+        "Pacific Islands climate and security leadership",
+        "Critical mineral and LNG export markets",
+        "Balancing China trade dependency with US alliance"
+      ],
       "red_lines": [
         "Chinese military basing in the Pacific Islands region",
         "Trade embargoes targeting Australian critical mineral or agricultural exports"
-      ]
+      ],
+      "recent_events": [
+        { "event": "AUKUS submarine construction timeline accelerated", "type": "military", "impact": "Transforms Australia into nuclear-powered submarine operator" },
+        { "event": "Diplomatic reset with China restoring trade in barley and wine", "type": "diplomatic", "impact": "Eases economic coercion while maintaining security posture" }
+      ],
+      "official_statements": [
+        "We will cooperate with China where we can, disagree where we must, and invest in our own security.",
+        "The Pacific is our neighborhood — we will not cede it to coercion."
+      ],
+      "decision_style": "Alliance-anchored pragmatism with economic hedging."
     },
-    "New Zealand": {
-      "personality": "An independent-minded Pacific nation prioritizing climate diplomacy, indigenous rights, and multilateral trade while maintaining a nuclear-free security posture.",
+    {
+      "country": "New Zealand",
+      "region": "Oceania",
+      "leader": { "name": "Christopher Luxon", "title": "Prime Minister" },
+      "core_interests": [
+        "Nuclear-free Pacific policy",
+        "Climate diplomacy and Pacific Island solidarity",
+        "Diversified trade beyond China dependency",
+        "Indigenous rights and Treaty of Waitangi obligations"
+      ],
       "red_lines": [
         "Nuclear weapons testing or transit in the South Pacific",
         "Collapse of Pacific Island nations due to climate inaction by major emitters"
-      ]
+      ],
+      "recent_events": [
+        { "event": "Increased Pacific aid budget focused on climate resilience infrastructure", "type": "diplomatic", "impact": "Counters Chinese influence in Pacific Islands" },
+        { "event": "Trade diversification push toward ASEAN and Gulf markets", "type": "economic", "impact": "Reduces over-reliance on Chinese dairy and timber demand" }
+      ],
+      "official_statements": [
+        "The Pacific is not a chessboard — it is our home and our responsibility.",
+        "New Zealand's nuclear-free stance is a matter of national identity, not negotiation."
+      ],
+      "decision_style": "Values-driven multilateralism with independent foreign policy tradition."
     }
-  }
+  ],
+  "relations": [
+    { "from": "USA", "to": "Canada", "type": "ally" },
+    { "from": "USA", "to": "Japan", "type": "ally" },
+    { "from": "USA", "to": "Australia", "type": "ally" },
+    { "from": "USA", "to": "The Philippines", "type": "ally" },
+    { "from": "USA", "to": "Germany", "type": "ally" },
+    { "from": "USA", "to": "France", "type": "ally" },
+    { "from": "USA", "to": "Singapore", "type": "economic_partner" },
+    { "from": "USA", "to": "China", "type": "hostile" },
+    { "from": "USA", "to": "Iran", "type": "hostile" },
+    { "from": "USA", "to": "Brazil", "type": "economic_partner" },
+    { "from": "USA", "to": "New Zealand", "type": "ally" },
+    { "from": "China", "to": "Iran", "type": "economic_partner" },
+    { "from": "China", "to": "Singapore", "type": "economic_partner" },
+    { "from": "China", "to": "The Philippines", "type": "hostile" },
+    { "from": "China", "to": "Japan", "type": "hostile" },
+    { "from": "China", "to": "Australia", "type": "economic_partner" },
+    { "from": "China", "to": "Brazil", "type": "economic_partner" },
+    { "from": "China", "to": "South Africa", "type": "economic_partner" },
+    { "from": "China", "to": "Nigeria", "type": "economic_partner" },
+    { "from": "China", "to": "Argentina", "type": "economic_partner" },
+    { "from": "Japan", "to": "Australia", "type": "ally" },
+    { "from": "Japan", "to": "The Philippines", "type": "ally" },
+    { "from": "Japan", "to": "Singapore", "type": "economic_partner" },
+    { "from": "Germany", "to": "France", "type": "ally" },
+    { "from": "Germany", "to": "China", "type": "economic_partner" },
+    { "from": "France", "to": "Nigeria", "type": "economic_partner" },
+    { "from": "Australia", "to": "New Zealand", "type": "ally" },
+    { "from": "Australia", "to": "Singapore", "type": "economic_partner" },
+    { "from": "Brazil", "to": "South Africa", "type": "economic_partner" },
+    { "from": "Brazil", "to": "Argentina", "type": "economic_partner" },
+    { "from": "South Africa", "to": "Nigeria", "type": "economic_partner" },
+    { "from": "Iran", "to": "The Philippines", "type": "neutral" },
+    { "from": "Iran", "to": "Japan", "type": "economic_partner" }
+  ]
 }

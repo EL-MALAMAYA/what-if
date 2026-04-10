@@ -3,31 +3,68 @@ from pathlib import Path
 
 _PROFILES_PATH = Path(__file__).parent / "profiles.json"
 with open(_PROFILES_PATH, "r", encoding="utf-8") as _f:
-    PROFILES = json.load(_f)
+    _DATA = json.load(_f)
+
+COUNTRIES = _DATA["countries"]
+RELATIONS = _DATA["relations"]
+
+_COUNTRIES_BY_REGION: dict[str, list[dict]] = {}
+for _c in COUNTRIES:
+    _COUNTRIES_BY_REGION.setdefault(_c["region"], []).append(_c)
 
 
-def _format_country_data(countries: dict) -> str:
-    sections = []
-    for country, info in countries.items():
-        red_lines = "; ".join(info["red_lines"])
-        sections.append(
-            f"  - {country}: {info['personality']} "
-            f"Red lines: [{red_lines}]"
-        )
-    return "\n".join(sections)
+def _format_country_profile(country: dict) -> str:
+    leader = country["leader"]
+    red_lines = "; ".join(country["red_lines"])
+    core = "; ".join(country["core_interests"])
+    events = " | ".join(
+        f"{e['event']} ({e['type']}, impact: {e['impact']})"
+        for e in country["recent_events"]
+    )
+    statements = " | ".join(country["official_statements"])
+
+    return (
+        f"  {country['country']} — Leader: {leader['name']} ({leader['title']})\n"
+        f"    Core interests: {core}\n"
+        f"    Red lines: [{red_lines}]\n"
+        f"    Recent events: {events}\n"
+        f"    Official stance: {statements}\n"
+        f"    Decision style: {country['decision_style']}"
+    )
+
+
+def _format_relations(region_countries: list[dict]) -> str:
+    names = {c["country"] for c in region_countries}
+    relevant = [
+        r for r in RELATIONS
+        if r["from"] in names or r["to"] in names
+    ]
+    if not relevant:
+        return "  (No mapped relations)"
+    return "\n".join(
+        f"  {r['from']} → {r['to']}: {r['type']}"
+        for r in relevant
+    )
 
 
 def get_continent_prompt(continent_name: str) -> str:
-    countries = PROFILES.get(continent_name, {})
-    formatted_country_data = _format_country_data(countries)
+    region_countries = _COUNTRIES_BY_REGION.get(continent_name, [])
+
+    profiles_block = "\n\n".join(
+        _format_country_profile(c) for c in region_countries
+    )
+    relations_block = _format_relations(region_countries)
 
     return (
         f"You represent the {continent_name} Regional Council. "
-        f"You are not a monolith. You must base your reaction on the specific "
-        f"profiles and red lines of your constituent nations:\n\n"
-        f"{formatted_country_data}\n\n"
+        f"Base your reaction on the following rich profiles and relationship "
+        f"dynamics of your constituent nations:\n\n"
+        f"=== NATION PROFILES ===\n{profiles_block}\n\n"
+        f"=== KEY RELATIONS ===\n{relations_block}\n\n"
+        f"Explicitly weigh their recent events, core interests, and active "
+        f"alliances/hostilities when forming the region's consensus. "
         f"Summarize the region's overall reaction in 2-3 paragraphs, "
-        f"explicitly citing how these specific nations influenced the consensus."
+        f"citing how specific nations influenced the outcome."
     )
 
 

@@ -10,7 +10,14 @@ load_dotenv()
 
 _PROFILES_PATH = Path(__file__).parent / "profiles.json"
 with open(_PROFILES_PATH, "r", encoding="utf-8") as _f:
-    profiles = json.load(_f)
+    _raw = json.load(_f)
+
+countries_list = _raw["countries"]
+relations_list = _raw["relations"]
+
+countries_by_region: dict[str, list[dict]] = {}
+for _c in countries_list:
+    countries_by_region.setdefault(_c["region"], []).append(_c)
 
 st.set_page_config(
     page_title="What If: Global Consequence Engine",
@@ -264,6 +271,13 @@ CONTINENT_ICONS = {
     "Oceania": "\U0001F30A",
 }
 
+RELATION_BADGES = {
+    "ally": ("\U0001F91D", "#10b981"),
+    "economic_partner": ("\U0001F4B1", "#3b82f6"),
+    "hostile": ("\U000026A0\uFE0F", "#ef4444"),
+    "neutral": ("\U00002796", "#64748b"),
+}
+
 with st.sidebar:
     st.markdown(
         "<div style='font-size:.7rem;font-weight:600;letter-spacing:.1em;"
@@ -272,28 +286,74 @@ with st.sidebar:
         "Active Geopolitical Profiles</div>",
         unsafe_allow_html=True,
     )
-    st.caption(f"{sum(len(c) for c in profiles.values())} nations across {len(profiles)} continents")
+    st.caption(
+        f"{len(countries_list)} nations across {len(countries_by_region)} continents "
+        f"| {len(relations_list)} mapped relations"
+    )
 
-    for continent, countries in profiles.items():
+    for continent, members in countries_by_region.items():
         icon = CONTINENT_ICONS.get(continent, "\U0001F310")
-        with st.expander(f"{icon}  {continent}  ({len(countries)})", expanded=False):
-            for country, info in countries.items():
-                st.markdown(f"**{country}**")
+        with st.expander(f"{icon}  {continent}  ({len(members)})", expanded=False):
+            for c in members:
+                leader = c["leader"]
+                st.markdown(f"**{c['country']}** — {leader['name']}, *{leader['title']}*")
                 st.markdown(
                     f"<span style='color:#94a3b8;font-size:.84rem'>"
-                    f"{info['personality']}</span>",
+                    f"<b>Decision style:</b> {c['decision_style']}</span>",
                     unsafe_allow_html=True,
                 )
+
+                interests_md = "".join(
+                    f"<li style='color:#94a3b8;font-size:.8rem'>{ci}</li>"
+                    for ci in c["core_interests"]
+                )
+                st.markdown(
+                    f"<div style='font-size:.7rem;font-weight:600;color:#64748b;"
+                    f"margin-top:.4rem;text-transform:uppercase;letter-spacing:.05em'>"
+                    f"Core Interests</div>"
+                    f"<ul style='margin:.1rem 0 .4rem;padding-left:1.2rem'>{interests_md}</ul>",
+                    unsafe_allow_html=True,
+                )
+
                 red_lines_md = "".join(
                     f"<li style='color:#ef4444;font-size:.8rem'>"
                     f"<i class='icon-shield-alert' style='font-size:.7rem;margin-right:.3rem;opacity:.7'></i>{rl}</li>"
-                    for rl in info["red_lines"]
+                    for rl in c["red_lines"]
                 )
                 st.markdown(
-                    f"<ul style='margin:.2rem 0 .8rem;padding-left:1.2rem'>"
-                    f"{red_lines_md}</ul>",
+                    f"<div style='font-size:.7rem;font-weight:600;color:#ef4444;"
+                    f"margin-top:.3rem;text-transform:uppercase;letter-spacing:.05em'>"
+                    f"Red Lines</div>"
+                    f"<ul style='margin:.1rem 0 .4rem;padding-left:1.2rem'>{red_lines_md}</ul>",
                     unsafe_allow_html=True,
                 )
+
+                country_relations = [
+                    r for r in relations_list
+                    if r["from"] == c["country"] or r["to"] == c["country"]
+                ]
+                if country_relations:
+                    rel_tags = ""
+                    for r in country_relations:
+                        partner = r["to"] if r["from"] == c["country"] else r["from"]
+                        badge_icon, badge_color = RELATION_BADGES.get(r["type"], ("\U0001F310", "#64748b"))
+                        rel_tags += (
+                            f"<span style='display:inline-block;font-size:.75rem;padding:.15rem .5rem;"
+                            f"margin:.15rem .2rem;border-radius:6px;border:1px solid {badge_color}33;"
+                            f"color:{badge_color};background:{badge_color}11'>"
+                            f"{badge_icon} {partner}</span>"
+                        )
+                    st.markdown(
+                        f"<div style='font-size:.7rem;font-weight:600;color:#64748b;"
+                        f"margin-top:.3rem;text-transform:uppercase;letter-spacing:.05em'>"
+                        f"Relations</div><div style='margin:.2rem 0 .8rem'>{rel_tags}</div>",
+                        unsafe_allow_html=True,
+                    )
+                else:
+                    st.markdown(
+                        "<div style='margin-bottom:.8rem'></div>",
+                        unsafe_allow_html=True,
+                    )
 
 # ── Header ──────────────────────────────────────────────────────────────────────
 st.markdown(
