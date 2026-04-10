@@ -544,110 +544,56 @@ def _threat_color(probability: int) -> tuple[str, str]:
 
 
 PREGENERATED_PROMPTS = {
-    "South China Sea": (
-        "What If — China declared full sovereignty over the South China Sea?\n\n"
-        "Singapore's position as a neutral trading hub is immediately under threat. Over 60% of global "
-        "trade passes through the Malacca Strait and South China Sea — any militarization of these waters "
-        "raises shipping costs, delays supply chains, and forces Singapore to pick sides it has carefully "
-        "avoided for decades. Local professionals in logistics, shipping, and port operations would feel it "
-        "first. Trade finance bankers, commodity traders at Trafigura and Vitol, and maritime lawyers would "
-        "face a sudden spike in risk premiums and contract disputes. Singapore's diplomatic corps would be "
-        "working overtime to maintain neutrality while keeping both Washington and Beijing at the table."
-    ),
-    "Russia-NATO Border Crisis": (
-        "What If — Russia massed 200,000 troops on the Finnish border and Finland invoked Article 5?\n\n"
-        "Singapore's deep financial ties to Europe mean a NATO-Russia war scenario sends immediate shockwaves "
-        "through the SGX and local fund managers exposed to European equities. Energy prices spike globally — "
-        "hurting Singapore's petrochemical sector and raising costs for manufacturers in Jurong Island. Local "
-        "professionals in wealth management would face capital flight from European clients seeking safe havens "
-        "in Asia, ironically driving short-term inflows into Singapore private banking. Risk consultants, "
-        "geopolitical analysts, and compliance officers at Singapore-based MNCs with European operations would "
-        "be in crisis mode overnight."
-    ),
-    "Taiwan Strait Blockade": (
-        "What If — China imposed a naval blockade on Taiwan cutting off semiconductor exports?\n\n"
-        "This is arguably the most dangerous scenario for Singapore's economy. Singapore is deeply embedded in "
-        "the global semiconductor supply chain — companies like Micron, GlobalFoundries, and Applied Materials "
-        "have major operations here. A Taiwan blockade means production halts, component shortages, and layoffs "
-        "ripple through Singapore's electronics and precision engineering sectors almost immediately. Local PMETs "
-        "in semiconductor manufacturing, chip design, and electronics supply chain management face direct job risk. "
-        "On the flip side, Singapore could emerge as a neutral rerouting hub and alternative manufacturing base — "
-        "creating opportunity for engineers and operations professionals agile enough to pivot."
-    ),
-    "Middle East Nuclear Escalation": (
-        "What If — Iran successfully tested a nuclear device and Israel had 6 hours to decide whether to strike?\n\n"
-        "Oil prices would surge past $150 a barrel within hours of the announcement — hitting Singapore's aviation, "
-        "transportation, and petrochemical industries hard. Singapore Airlines, one of the nation's most strategic "
-        "assets, would face fuel cost crises and route disruptions through Middle Eastern airspace. Local professionals "
-        "in oil trading, particularly those at the Singapore offices of BP, Shell, and commodity trading houses, would "
-        "face one of the most volatile markets in a generation. For finance professionals, a flight to safety means "
-        "gold, USD, and Singapore Government Securities spike — creating both risk and opportunity depending on which "
-        "side of the trade you're on."
-    ),
-    "Nile River Resource War": (
-        "What If — Ethiopia diverted the Nile River and Egypt mobilized its military in response?\n\n"
-        "While geographically distant, this conflict matters deeply to Singapore as a global food trading hub. "
-        "Singapore imports over 90% of its food — and any disruption to North African agricultural output tightens "
-        "global grain and commodity markets. Local agri-food professionals, food importers, and supply chain managers "
-        "would need to rapidly diversify sourcing. For Singapore-based infrastructure and engineering firms with African "
-        "operations — like Sembcorp — conflict in the region raises project risk and insurance costs significantly. "
-        "Longer term, this scenario accelerates Singapore's push toward food tech and vertical farming, opening doors "
-        "for local startups and professionals in that space."
-    ),
-    "US Dollar": (
-        "What If — The US Dollar lost its status as the world's reserve currency?\n\n"
-        "Singapore's entire financial architecture is built around USD dominance. The MAS manages SGD against a basket "
-        "heavily influenced by the dollar — a reserve currency shift would force a fundamental rethink of Singapore's "
-        "monetary policy overnight. Local professionals in private banking and wealth management would face a chaotic "
-        "repricing of assets as clients scramble to diversify out of USD-denominated holdings. The Singapore Exchange "
-        "would see unprecedented volatility. For everyday Singaporeans, import costs rise sharply as the SGD loses its "
-        "dollar anchor. Long term, Singapore could actually benefit by positioning itself as a multi-currency neutral hub "
-        "— but the transition period would be brutal for finance professionals, forex traders, and treasury teams across "
-        "every major bank on Marina Bay."
-    ),
-    "US-China Trade War Escalation": (
-        "What If — The US imposed 200% tariffs on all Chinese goods and severed tech trade entirely?\n\n"
-        "Singapore sits directly in the crossfire. As one of China's largest foreign investors and simultaneously a close "
-        "US security partner, Singapore cannot afford to choose a side — but the market will choose for it. Local "
-        "manufacturers supplying components to both American and Chinese tech firms face immediate order cancellations and "
-        "supply chain restructuring. Professionals in semiconductor equipment, precision engineering, and electronics "
-        "manufacturing would face layoffs or urgent pivots. The silver lining — Singapore could emerge as the Switzerland "
-        "of the tech war, hosting neutral data centers, R&D facilities, and corporate headquarters for companies needing "
-        "a foothold in both ecosystems. Tech professionals and corporate lawyers specializing in restructuring would be in "
-        "enormous demand."
-    ),
-    "US Military Withdrawal from Asia": (
-        "What If — The US withdrew its military presence from Asia and disbanded its Pacific alliances?\n\n"
-        "Singapore hosts US naval logistics at Changi Naval Base and has deep defense cooperation agreements with "
-        "Washington. A full US withdrawal would shatter the security architecture that has underpinned Singapore's "
-        "stability since independence. Defense and security professionals in Singapore's SAF and defense tech sector would "
-        "face an urgent rearmament mandate — Singapore's defense budget would likely double within years. For business "
-        "professionals, the immediate effect is uncertainty — foreign investment slows, regional risk premiums rise, and "
-        "MNCs reconsider Singapore as a regional HQ if the security umbrella disappears. Longer term, this accelerates "
-        "ASEAN defense integration and opens massive opportunities for local defense tech, cybersecurity, and intelligence "
-        "professionals."
-    ),
-    "US Debt Default": (
-        "What If — The US defaulted on its national debt for the first time in history?\n\n"
-        "Singapore holds significant US Treasuries as part of its foreign reserves — a default would hit the nation's "
-        "balance sheet directly and force MAS into emergency reserve reallocation. Local banks — DBS, OCBC, UOB — all "
-        "have USD exposure and would face a liquidity stress event unlike anything since 2008. Finance professionals across "
-        "Singapore's banking sector would be in crisis management mode for months. For ordinary Singaporeans, the ripple "
-        "effects hit fast — credit tightens, mortgage rates spike, and business loans become harder to secure. Ironically, "
-        "Singapore's reputation for fiscal discipline could make it a safe haven destination for capital fleeing US assets "
-        "— benefiting local private bankers and asset managers who are positioned correctly."
-    ),
-    "US AI Monopoly": (
-        "What If — The US declared AI a national security asset and banned all AI exports to Asia?\n\n"
-        "This is perhaps the most existential What If for Singapore's next decade. Singapore's Smart Nation ambitions, "
-        "its GovTech infrastructure, and nearly every major AI initiative running in local banks, hospitals, and logistics "
-        "firms run on US-built AI models and cloud infrastructure. An export ban would force an immediate and painful pivot. "
-        "Local AI professionals and engineers would suddenly be the most valuable people in the country as Singapore races "
-        "to build sovereign AI capabilities. Government-linked companies like Temasek and GIC would accelerate investments "
-        "in local and European AI alternatives. For professionals in data science, machine learning, and AI governance — "
-        "this scenario paradoxically creates a once-in-a-generation career opportunity as Singapore scrambles to close the "
-        "gap independently."
-    ),
+    "South China Sea": {
+        "prompt": "What If — China declared full sovereignty over the South China Sea?",
+        "response": "Singapore's position as a neutral trading hub is immediately under threat. Over 60% of global trade passes through the Malacca Strait and South China Sea — any militarization of these waters raises shipping costs, delays supply chains, and forces Singapore to pick sides it has carefully avoided for decades. Local professionals in logistics, shipping, and port operations would feel it first. Trade finance bankers, commodity traders at Trafigura and Vitol, and maritime lawyers would face a sudden spike in risk premiums and contract disputes. Singapore's diplomatic corps would be working overtime to maintain neutrality while keeping both Washington and Beijing at the table.",
+        "probability": 83,
+    },
+    "Russia-NATO Border Crisis": {
+        "prompt": "What If — Russia massed 200,000 troops on the Finnish border and Finland invoked Article 5?",
+        "response": "Singapore's deep financial ties to Europe mean a NATO-Russia war scenario sends immediate shockwaves through the SGX and local fund managers exposed to European equities. Energy prices spike globally — hurting Singapore's petrochemical sector and raising costs for manufacturers in Jurong Island. Local professionals in wealth management would face capital flight from European clients seeking safe havens in Asia, ironically driving short-term inflows into Singapore private banking. Risk consultants, geopolitical analysts, and compliance officers at Singapore-based MNCs with European operations would be in crisis mode overnight.",
+        "probability": 79,
+    },
+    "Taiwan Strait Blockade": {
+        "prompt": "What If — China imposed a naval blockade on Taiwan cutting off semiconductor exports?",
+        "response": "This is arguably the most dangerous scenario for Singapore's economy. Singapore is deeply embedded in the global semiconductor supply chain — companies like Micron, GlobalFoundries, and Applied Materials have major operations here. A Taiwan blockade means production halts, component shortages, and layoffs ripple through Singapore's electronics and precision engineering sectors almost immediately. Local PMETs in semiconductor manufacturing, chip design, and electronics supply chain management face direct job risk. On the flip side, Singapore could emerge as a neutral rerouting hub and alternative manufacturing base — creating opportunity for engineers and operations professionals agile enough to pivot.",
+        "probability": 88,
+    },
+    "Middle East Nuclear Escalation": {
+        "prompt": "What If — Iran successfully tested a nuclear device and Israel had 6 hours to decide whether to strike?",
+        "response": "Oil prices would surge past $150 a barrel within hours of the announcement — hitting Singapore's aviation, transportation, and petrochemical industries hard. Singapore Airlines, one of the nation's most strategic assets, would face fuel cost crises and route disruptions through Middle Eastern airspace. Local professionals in oil trading, particularly those at the Singapore offices of BP, Shell, and commodity trading houses, would face one of the most volatile markets in a generation. For finance professionals, a flight to safety means gold, USD, and Singapore Government Securities spike — creating both risk and opportunity depending on which side of the trade you're on.",
+        "probability": 86,
+    },
+    "Nile River Resource War": {
+        "prompt": "What If — Ethiopia diverted the Nile River and Egypt mobilized its military in response?",
+        "response": "While geographically distant, this conflict matters deeply to Singapore as a global food trading hub. Singapore imports over 90% of its food — and any disruption to North African agricultural output tightens global grain and commodity markets. Local agri-food professionals, food importers, and supply chain managers would need to rapidly diversify sourcing. For Singapore-based infrastructure and engineering firms with African operations — like Sembcorp — conflict in the region raises project risk and insurance costs significantly. Longer term, this scenario accelerates Singapore's push toward food tech and vertical farming, opening doors for local startups and professionals in that space.",
+        "probability": 63,
+    },
+    "US Dollar": {
+        "prompt": "What If — The US Dollar lost its status as the world's reserve currency?",
+        "response": "Singapore's entire financial architecture is built around USD dominance. The MAS manages SGD against a basket heavily influenced by the dollar — a reserve currency shift would force a fundamental rethink of Singapore's monetary policy overnight. Local professionals in private banking and wealth management would face a chaotic repricing of assets as clients scramble to diversify out of USD-denominated holdings. The Singapore Exchange would see unprecedented volatility. For everyday Singaporeans, import costs rise sharply as the SGD loses its dollar anchor. Long term, Singapore could actually benefit by positioning itself as a multi-currency neutral hub — but the transition period would be brutal for finance professionals, forex traders, and treasury teams across every major bank on Marina Bay.",
+        "probability": 84,
+    },
+    "US-China Trade War Escalation": {
+        "prompt": "What If — The US imposed 200% tariffs on all Chinese goods and severed tech trade entirely?",
+        "response": "Singapore sits directly in the crossfire. As one of China's largest foreign investors and simultaneously a close US security partner, Singapore cannot afford to choose a side — but the market will choose for it. Local manufacturers supplying components to both American and Chinese tech firms face immediate order cancellations and supply chain restructuring. Professionals in semiconductor equipment, precision engineering, and electronics manufacturing would face layoffs or urgent pivots. The silver lining — Singapore could emerge as the Switzerland of the tech war, hosting neutral data centers, R&D facilities, and corporate headquarters for companies needing a foothold in both ecosystems. Tech professionals and corporate lawyers specializing in restructuring would be in enormous demand.",
+        "probability": 82,
+    },
+    "US Military Withdrawal from Asia": {
+        "prompt": "What If — The US withdrew its military presence from Asia and disbanded its Pacific alliances?",
+        "response": "Singapore hosts US naval logistics at Changi Naval Base and has deep defense cooperation agreements with Washington. A full US withdrawal would shatter the security architecture that has underpinned Singapore's stability since independence. Defense and security professionals in Singapore's SAF and defense tech sector would face an urgent rearmament mandate — Singapore's defense budget would likely double within years. For business professionals, the immediate effect is uncertainty — foreign investment slows, regional risk premiums rise, and MNCs reconsider Singapore as a regional HQ if the security umbrella disappears. Longer term, this accelerates ASEAN defense integration and opens massive opportunities for local defense tech, cybersecurity, and intelligence professionals.",
+        "probability": 77,
+    },
+    "US Debt Default": {
+        "prompt": "What If — The US defaulted on its national debt for the first time in history?",
+        "response": "Singapore holds significant US Treasuries as part of its foreign reserves — a default would hit the nation's balance sheet directly and force MAS into emergency reserve reallocation. Local banks — DBS, OCBC, UOB — all have USD exposure and would face a liquidity stress event unlike anything since 2008. Finance professionals across Singapore's banking sector would be in crisis management mode for months. For ordinary Singaporeans, the ripple effects hit fast — credit tightens, mortgage rates spike, and business loans become harder to secure. Ironically, Singapore's reputation for fiscal discipline could make it a safe haven destination for capital fleeing US assets — benefiting local private bankers and asset managers who are positioned correctly.",
+        "probability": 81,
+    },
+    "US AI Monopoly": {
+        "prompt": "What If — The US declared AI a national security asset and banned all AI exports to Asia?",
+        "response": "This is perhaps the most existential What If for Singapore's next decade. Singapore's Smart Nation ambitions, its GovTech infrastructure, and nearly every major AI initiative running in local banks, hospitals, and logistics firms run on US-built AI models and cloud infrastructure. An export ban would force an immediate and painful pivot. Local AI professionals and engineers would suddenly be the most valuable people in the country as Singapore races to build sovereign AI capabilities. Government-linked companies like Temasek and GIC would accelerate investments in local and European AI alternatives. For professionals in data science, machine learning, and AI governance — this scenario paradoxically creates a once-in-a-generation career opportunity as Singapore scrambles to close the gap independently.",
+        "probability": 75,
+    },
 }
 
 
@@ -704,7 +650,7 @@ selected_prompt = st.selectbox(
     index=0,
 )
 if selected_prompt != "Custom (type your own)":
-    st.session_state["scenario_input"] = PREGENERATED_PROMPTS[selected_prompt]
+    st.session_state["scenario_input"] = PREGENERATED_PROMPTS[selected_prompt]["prompt"]
 
 scenario = st.text_area(
     "scenario_input",
@@ -738,12 +684,21 @@ if run_clicked:
     if not scenario.strip():
         st.warning("Please enter a scenario before running the simulation.")
     else:
-        with st.spinner("Simulating global geopolitical fallout..."):
-            data = run_simulation(
-                scenario.strip(),
-                provider=selected_provider,
-                claude_api_key=(claude_key_input.strip() if claude_key_input else None),
-            )
+        if selected_prompt != "Custom (type your own)":
+            preset = PREGENERATED_PROMPTS[selected_prompt]
+            data = {
+                "prediction": "Pre-generated scenario brief",
+                "report": preset["response"],
+                "probability": preset["probability"],
+                "links": [],
+            }
+        else:
+            with st.spinner("Simulating global geopolitical fallout..."):
+                data = run_simulation(
+                    scenario.strip(),
+                    provider=selected_provider,
+                    claude_api_key=(claude_key_input.strip() if claude_key_input else None),
+                )
 
         st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
