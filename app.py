@@ -1,6 +1,7 @@
 import os
 import json
 from pathlib import Path
+from textwrap import dedent
 
 from dotenv import load_dotenv
 import streamlit as st
@@ -27,7 +28,7 @@ st.set_page_config(
 )
 
 st.markdown(
-    """
+    dedent("""
     <link href="https://unpkg.com/lucide-static@latest/font/lucide.css" rel="stylesheet">
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Roboto+Mono:wght@400;500;600&display=swap');
@@ -386,7 +387,7 @@ st.markdown(
         color: var(--text-muted) !important;
     }
     </style>
-    """,
+    """).strip(),
     unsafe_allow_html=True,
 )
 
