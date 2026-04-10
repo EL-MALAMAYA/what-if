@@ -23,145 +23,208 @@ st.set_page_config(
     page_title="What If: Global Consequence Engine",
     page_icon="🌐",
     layout="wide",
-    initial_sidebar_state="expanded",
+    initial_sidebar_state="collapsed",
 )
 
 st.markdown(
     """
     <link href="https://unpkg.com/lucide-static@latest/font/lucide.css" rel="stylesheet">
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Roboto+Mono:wght@400;500;600&display=swap');
 
+    /* ===== GLOBAL OVERRIDES ===== */
     :root {
-        --bg-primary: #0a0e17;
-        --bg-secondary: #111827;
-        --bg-card: #1a2332;
-        --border-color: #1e3a5f;
+        --bg-primary: #0b0f19;
+        --bg-panel: rgba(15, 23, 42, 0.6);
+        --bg-panel-solid: #0f172a;
+        --border-color: #1e293b;
         --accent-cyan: #00d4ff;
         --accent-blue: #3b82f6;
         --accent-emerald: #10b981;
         --accent-amber: #f59e0b;
         --accent-red: #ef4444;
-        --text-primary: #f1f5f9;
+        --text-primary: #e2e8f0;
         --text-secondary: #94a3b8;
         --text-muted: #64748b;
+        --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
+        --font-mono: 'Roboto Mono', ui-monospace, monospace;
     }
 
     .stApp {
-        background: var(--bg-primary);
-        font-family: 'Inter', sans-serif;
+        background: var(--bg-primary) !important;
+        color: var(--text-primary);
+        font-family: var(--font-sans);
     }
 
-    .stApp header { background: transparent !important; }
+    .stApp header,
+    .stApp [data-testid="stHeader"] {
+        background: transparent !important;
+        display: none !important;
+    }
 
     .block-container {
-        padding-top: 2rem !important;
-        max-width: 1100px;
+        padding-top: 1rem !important;
+        padding-bottom: 2rem !important;
+        max-width: 1400px;
     }
 
-    h1, h2, h3, h4, p, li, span, div {
-        font-family: 'Inter', sans-serif !important;
+    h1, h2, h3, h4, h5, h6, p, li, span, div, label, input, textarea, button {
+        font-family: var(--font-sans) !important;
+        color: var(--text-primary);
     }
 
-    /* ---------- header ---------- */
+    /* Kill default Streamlit padding, toolbar, menu */
+    #MainMenu, footer, .stDeployButton,
+    [data-testid="stToolbar"],
+    [data-testid="stDecoration"] { display: none !important; }
+
+    /* ===== SIDEBAR ===== */
+    section[data-testid="stSidebar"] {
+        background: var(--bg-primary) !important;
+        border-right: 1px solid var(--border-color) !important;
+    }
+    section[data-testid="stSidebar"] .block-container {
+        padding-top: .5rem !important;
+    }
+    section[data-testid="stSidebar"] p,
+    section[data-testid="stSidebar"] span,
+    section[data-testid="stSidebar"] li {
+        color: var(--text-secondary) !important;
+    }
+
+    /* ===== .stCard — futuristic terminal panel ===== */
+    .stCard {
+        background-color: rgba(15, 23, 42, 0.6);
+        border: 1px solid #1e293b;
+        border-radius: 6px;
+        padding: 1.5rem;
+        color: var(--text-primary);
+        margin-bottom: 1rem;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+    .stCard .card-label {
+        font-family: var(--font-mono) !important;
+        font-size: .65rem;
+        font-weight: 600;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: .6rem;
+        border-bottom: 1px solid rgba(30,41,59,.5);
+        padding-bottom: .4rem;
+    }
+
+    /* ===== Legacy .card (backward compat, same aesthetic) ===== */
+    .card {
+        background-color: rgba(15, 23, 42, 0.6);
+        border: 1px solid #1e293b;
+        border-radius: 6px;
+        padding: 1.5rem;
+        margin-bottom: 1rem;
+        backdrop-filter: blur(8px);
+        -webkit-backdrop-filter: blur(8px);
+    }
+    .card-label {
+        font-family: var(--font-mono) !important;
+        font-size: .65rem;
+        font-weight: 600;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-bottom: .6rem;
+        border-bottom: 1px solid rgba(30,41,59,.5);
+        padding-bottom: .4rem;
+    }
+
+    /* ===== HEADER ===== */
     .dash-header {
         text-align: center;
-        padding: 2.5rem 0 1rem;
+        padding: 2rem 0 1rem;
     }
     .dash-header .tag {
         display: inline-block;
-        background: rgba(0,212,255,.1);
+        background: rgba(0,212,255,.08);
         color: var(--accent-cyan);
-        font-size: .7rem;
+        font-family: var(--font-mono) !important;
+        font-size: .65rem;
         font-weight: 600;
-        letter-spacing: .12em;
+        letter-spacing: .14em;
         text-transform: uppercase;
-        padding: .35rem .9rem;
-        border-radius: 999px;
-        border: 1px solid rgba(0,212,255,.25);
+        padding: .3rem .8rem;
+        border-radius: 3px;
+        border: 1px solid rgba(0,212,255,.2);
         margin-bottom: .8rem;
     }
     .dash-header h1 {
-        font-size: 2.6rem;
+        font-size: 2.4rem;
         font-weight: 800;
-        background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 100%);
+        background: linear-gradient(135deg, #ffffff 0%, var(--accent-cyan) 50%, var(--accent-blue) 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         margin: 0;
         line-height: 1.15;
+        letter-spacing: -.02em;
     }
     .dash-header .sub {
-        color: var(--text-secondary);
-        font-size: .95rem;
+        color: var(--text-muted);
+        font-size: .88rem;
         margin-top: .5rem;
+        font-family: var(--font-mono) !important;
     }
 
-    /* ---------- input area ---------- */
+    /* ===== INPUT AREA ===== */
     .stTextArea textarea {
-        background: var(--bg-card) !important;
+        background: rgba(15, 23, 42, 0.6) !important;
         border: 1px solid var(--border-color) !important;
-        border-radius: 12px !important;
+        border-radius: 6px !important;
         color: var(--text-primary) !important;
-        font-size: .95rem !important;
+        font-size: .9rem !important;
         padding: 1rem !important;
-        font-family: 'Inter', sans-serif !important;
-        transition: border-color .2s;
+        font-family: var(--font-sans) !important;
+        transition: border-color .2s, box-shadow .2s;
     }
     .stTextArea textarea:focus {
         border-color: var(--accent-cyan) !important;
-        box-shadow: 0 0 0 2px rgba(0,212,255,.15) !important;
+        box-shadow: 0 0 0 1px rgba(0,212,255,.2), 0 0 20px rgba(0,212,255,.05) !important;
     }
     .stTextArea label { display: none !important; }
 
-    /* ---------- button ---------- */
+    /* ===== BUTTON ===== */
     .stButton > button {
         background: linear-gradient(135deg, var(--accent-cyan), var(--accent-blue)) !important;
-        color: #000 !important;
+        color: #0b0f19 !important;
         font-weight: 700 !important;
-        font-size: .95rem !important;
+        font-size: .85rem !important;
+        font-family: var(--font-mono) !important;
+        letter-spacing: .06em;
+        text-transform: uppercase;
         border: none !important;
-        border-radius: 10px !important;
-        padding: .7rem 2.4rem !important;
-        letter-spacing: .03em;
-        transition: opacity .2s, transform .15s;
+        border-radius: 4px !important;
+        padding: .65rem 2rem !important;
+        transition: opacity .2s, transform .15s, box-shadow .2s;
         width: 100%;
     }
     .stButton > button:hover {
-        opacity: .88 !important;
+        opacity: .9 !important;
         transform: translateY(-1px);
+        box-shadow: 0 0 20px rgba(0,212,255,.2) !important;
     }
     .stButton > button:active { transform: translateY(0); }
 
-    /* ---------- cards ---------- */
-    .card {
-        background: var(--bg-card);
-        border: 1px solid var(--border-color);
-        border-radius: 14px;
-        padding: 1.6rem 1.8rem;
-        margin-bottom: 1.2rem;
-    }
-    .card-label {
-        font-size: .7rem;
-        font-weight: 600;
-        letter-spacing: .1em;
-        text-transform: uppercase;
-        color: var(--text-muted);
-        margin-bottom: .6rem;
-    }
-
-    /* ---------- prediction ---------- */
+    /* ===== PREDICTION ===== */
     .prediction-text {
-        font-size: 1.55rem;
+        font-size: 1.4rem;
         font-weight: 700;
         color: var(--text-primary);
-        line-height: 1.35;
+        line-height: 1.4;
     }
 
-    /* ---------- probability ring ---------- */
+    /* ===== PROBABILITY RING ===== */
     .prob-wrap {
         display: flex;
         align-items: center;
-        gap: 1.4rem;
+        gap: 1.2rem;
     }
     .prob-ring {
         position: relative;
@@ -171,7 +234,7 @@ st.markdown(
     .prob-ring svg { transform: rotate(-90deg); }
     .prob-ring .track {
         fill: none;
-        stroke: rgba(255,255,255,.06);
+        stroke: rgba(255,255,255,.04);
         stroke-width: 8;
     }
     .prob-ring .bar {
@@ -186,76 +249,142 @@ st.markdown(
         display: flex;
         align-items: center;
         justify-content: center;
-        font-size: 1.5rem;
-        font-weight: 800;
+        font-family: var(--font-mono) !important;
+        font-size: 1.4rem;
+        font-weight: 700;
         color: var(--text-primary);
     }
     .prob-label {
         color: var(--text-secondary);
-        font-size: .85rem;
+        font-size: .82rem;
         line-height: 1.5;
     }
     .prob-label strong {
         display: block;
-        font-size: 1rem;
+        font-family: var(--font-mono) !important;
+        font-size: .95rem;
         color: var(--text-primary);
+        text-transform: uppercase;
+        letter-spacing: .05em;
     }
 
-    /* ---------- report ---------- */
+    /* ===== REPORT ===== */
     .report-text {
         color: var(--text-secondary);
-        font-size: .92rem;
-        line-height: 1.75;
+        font-size: .88rem;
+        line-height: 1.8;
     }
-    .report-text p { margin-bottom: 1rem; }
+    .report-text p { margin-bottom: .9rem; }
 
-    /* ---------- links ---------- */
+    /* ===== LINKS ===== */
     .link-item {
         display: flex;
         align-items: center;
         gap: .6rem;
-        padding: .65rem 1rem;
-        background: rgba(59,130,246,.06);
-        border: 1px solid rgba(59,130,246,.18);
-        border-radius: 10px;
-        margin-bottom: .55rem;
-        transition: background .2s;
+        padding: .55rem .9rem;
+        background: rgba(59,130,246,.04);
+        border: 1px solid rgba(59,130,246,.12);
+        border-radius: 4px;
+        margin-bottom: .45rem;
+        transition: background .2s, border-color .2s;
     }
-    .link-item:hover { background: rgba(59,130,246,.12); }
+    .link-item:hover {
+        background: rgba(59,130,246,.1);
+        border-color: rgba(59,130,246,.25);
+    }
     .link-item a {
         color: var(--accent-blue);
-        font-size: .85rem;
+        font-family: var(--font-mono) !important;
+        font-size: .78rem;
         text-decoration: none;
         word-break: break-all;
         font-weight: 500;
     }
     .link-item a:hover { text-decoration: underline; }
-    .link-item [class^="icon-"] {
-        flex-shrink: 0;
-    }
+    .link-item [class^="icon-"] { flex-shrink: 0; }
 
-    /* ---------- divider ---------- */
+    /* ===== DIVIDER ===== */
     .divider {
         border: none;
         border-top: 1px solid var(--border-color);
-        margin: 1.8rem 0;
+        margin: 1.5rem 0;
     }
 
-    /* ---------- spinner ---------- */
+    /* ===== SPINNER ===== */
     .stSpinner > div { color: var(--accent-cyan) !important; }
 
-    /* ---------- lucide icon helpers ---------- */
+    /* ===== LUCIDE ICON HELPERS ===== */
     [class^="icon-"], [class*=" icon-"] {
         vertical-align: -0.125em;
     }
-    .card-label [class^="icon-"], .card-label [class*=" icon-"] {
+    .card-label [class^="icon-"], .card-label [class*=" icon-"],
+    .stCard .card-label [class^="icon-"], .stCard .card-label [class*=" icon-"] {
         margin-right: .35rem;
-        font-size: .8rem;
-        opacity: .7;
+        font-size: .75rem;
+        opacity: .6;
     }
 
-    /* hide streamlit chrome */
-    #MainMenu, footer, .stDeployButton { display: none !important; }
+    /* ===== KPI METRIC ===== */
+    .kpi-metric {
+        text-align: center;
+        padding: 1rem 0;
+    }
+    .kpi-metric .kpi-value {
+        font-family: var(--font-mono) !important;
+        font-size: 4rem;
+        font-weight: 800;
+        line-height: 1;
+        letter-spacing: -.03em;
+    }
+    .kpi-metric .kpi-label {
+        font-family: var(--font-mono) !important;
+        font-size: .7rem;
+        font-weight: 600;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+        color: var(--text-muted);
+        margin-top: .4rem;
+    }
+    .kpi-metric .kpi-severity {
+        font-family: var(--font-mono) !important;
+        font-size: .85rem;
+        font-weight: 700;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+        margin-top: .3rem;
+    }
+
+    /* ===== MINI PROFILE (right column) ===== */
+    .mini-profile {
+        margin-bottom: .6rem;
+        padding-bottom: .6rem;
+        border-bottom: 1px solid rgba(30,41,59,.4);
+    }
+    .mini-profile:last-child { border-bottom: none; }
+    .mini-profile .mp-country {
+        font-weight: 700;
+        font-size: .82rem;
+        color: var(--text-primary);
+    }
+    .mini-profile .mp-leader {
+        font-size: .72rem;
+        color: var(--text-muted);
+        font-family: var(--font-mono) !important;
+    }
+    .mini-profile .mp-tags {
+        margin-top: .25rem;
+    }
+
+    /* ===== STREAMLIT WIDGET OVERRIDES ===== */
+    .stExpander {
+        border-color: var(--border-color) !important;
+    }
+    .stExpander summary {
+        color: var(--text-primary) !important;
+    }
+    [data-testid="stCaptionContainer"] {
+        color: var(--text-muted) !important;
+    }
     </style>
     """,
     unsafe_allow_html=True,
@@ -355,6 +484,16 @@ with st.sidebar:
                         unsafe_allow_html=True,
                     )
 
+def _threat_color(probability: int) -> tuple[str, str]:
+    """Return (hex color, severity label) based on probability score."""
+    if probability >= 75:
+        return "#ff3333", "Critical"
+    elif probability >= 40:
+        return "#ffcc00", "Warning"
+    else:
+        return "#00ffcc", "Stable"
+
+
 # ── Header ──────────────────────────────────────────────────────────────────────
 st.markdown(
     """
@@ -392,16 +531,21 @@ if _missing:
     )
     st.stop()
 
-# ── Input ────────────────────────────────────────────────────────────────────────
+# ── Control Panel ────────────────────────────────────────────────────────────────
+st.markdown(
+    '<div class="stCard"><div class="card-label">'
+    '<i class="icon-radar"></i>Scenario Input</div>',
+    unsafe_allow_html=True,
+)
 scenario = st.text_area(
     "scenario_input",
     placeholder="e.g. What if the US dollar lost its reserve currency status overnight?",
-    height=120,
+    height=100,
 )
-
-col_l, col_btn, col_r = st.columns([2, 1, 2])
+col_l, col_btn, col_r = st.columns([3, 2, 3])
 with col_btn:
     run_clicked = st.button("Run Simulation")
+st.markdown("</div>", unsafe_allow_html=True)
 
 # ── Simulation ───────────────────────────────────────────────────────────────────
 if run_clicked:
@@ -413,67 +557,46 @@ if run_clicked:
 
         st.markdown('<hr class="divider">', unsafe_allow_html=True)
 
-        # ── Prediction ───────────────────────────────────────────────────────
-        prediction = data.get("prediction", "No prediction available.")
-        st.markdown(
-            f"""
-            <div class="card">
-                <div class="card-label"><i class="icon-crosshair"></i>Prediction</div>
-                <div class="prediction-text">{prediction}</div>
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
-        # ── Probability + Report side-by-side ────────────────────────────────
         probability = int(data.get("probability", 0))
+        threat_hex, severity = _threat_color(probability)
+        prediction = data.get("prediction", "No prediction available.")
         report = data.get("report", "")
+        links = data.get("links", [])
 
-        if probability >= 75:
-            ring_color = "var(--accent-red)"
-            severity = "Critical"
-        elif probability >= 50:
-            ring_color = "var(--accent-amber)"
-            severity = "Elevated"
-        elif probability >= 25:
-            ring_color = "var(--accent-cyan)"
-            severity = "Moderate"
-        else:
-            ring_color = "var(--accent-emerald)"
-            severity = "Low"
+        # ── 70 / 30 split ────────────────────────────────────────────────────
+        col_main, col_right = st.columns([7, 3])
 
-        circumference = 2 * 3.14159 * 42
-        dash_offset = circumference * (1 - probability / 100)
-
-        col_prob, col_report = st.columns([1, 3])
-
-        with col_prob:
+        # ── MAIN COLUMN (70%) ────────────────────────────────────────────────
+        with col_main:
+            # KPI Metric
             st.markdown(
                 f"""
-                <div class="card">
+                <div class="stCard">
                     <div class="card-label"><i class="icon-activity"></i>Escalation Probability</div>
-                    <div class="prob-wrap">
-                        <div class="prob-ring">
-                            <svg width="100" height="100" viewBox="0 0 100 100">
-                                <circle class="track" cx="50" cy="50" r="42"/>
-                                <circle class="bar" cx="50" cy="50" r="42"
-                                    stroke="{ring_color}"
-                                    stroke-dasharray="{circumference}"
-                                    stroke-dashoffset="{dash_offset}"/>
-                            </svg>
-                            <div class="prob-value">{probability}%</div>
-                        </div>
-                        <div class="prob-label">
-                            <strong>{severity}</strong>
-                            Likelihood of major global shift
-                        </div>
+                    <div class="kpi-metric">
+                        <div class="kpi-value" style="color:{threat_hex}">{probability}%</div>
+                        <div class="kpi-severity" style="color:{threat_hex}">{severity}</div>
+                        <div class="kpi-label">Likelihood of major global shift</div>
                     </div>
                 </div>
                 """,
                 unsafe_allow_html=True,
             )
 
-        with col_report:
+            # Prediction
+            st.markdown(
+                f"""
+                <div class="stCard">
+                    <div class="card-label"><i class="icon-crosshair"></i>Prediction</div>
+                    <div class="prediction-text" style="border-bottom:3px solid {threat_hex};padding-bottom:.5rem">
+                        {prediction}
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+            # Report
             paragraphs = [p.strip() for p in report.split("\n\n") if p.strip()]
             if not paragraphs:
                 paragraphs = [p.strip() for p in report.split("\n") if p.strip()]
@@ -481,7 +604,7 @@ if run_clicked:
 
             st.markdown(
                 f"""
-                <div class="card">
+                <div class="stCard">
                     <div class="card-label"><i class="icon-file-text"></i>Global Impact Report</div>
                     <div class="report-text">{body_html}</div>
                 </div>
@@ -489,23 +612,67 @@ if run_clicked:
                 unsafe_allow_html=True,
             )
 
-        # ── Reference Links ──────────────────────────────────────────────────
-        links = data.get("links", [])
-        if links:
-            links_html = ""
-            for url in links:
-                links_html += (
-                    f'<div class="link-item">'
-                    f'<i class="icon-external-link" style="color:var(--accent-blue);font-size:.8rem;flex-shrink:0"></i>'
-                    f'<a href="{url}" target="_blank" rel="noopener">{url}</a>'
-                    f"</div>"
+        # ── RIGHT COLUMN (30%) ───────────────────────────────────────────────
+        with col_right:
+            # Active Profiles panel
+            profiles_html = ""
+            for continent, members in countries_by_region.items():
+                c_icon = CONTINENT_ICONS.get(continent, "\U0001F310")
+                profiles_html += (
+                    f"<div style='font-size:.65rem;font-weight:600;color:var(--text-muted);"
+                    f"text-transform:uppercase;letter-spacing:.1em;margin-top:.6rem;"
+                    f"margin-bottom:.3rem'>{c_icon} {continent}</div>"
                 )
+                for c in members:
+                    leader = c["leader"]
+                    rel_for_country = [
+                        r for r in relations_list
+                        if r["from"] == c["country"] or r["to"] == c["country"]
+                    ]
+                    tags = ""
+                    for r in rel_for_country[:4]:
+                        partner = r["to"] if r["from"] == c["country"] else r["from"]
+                        b_icon, b_color = RELATION_BADGES.get(r["type"], ("\U0001F310", "#64748b"))
+                        tags += (
+                            f"<span style='display:inline-block;font-size:.65rem;padding:.1rem .35rem;"
+                            f"margin:.1rem .15rem 0 0;border-radius:3px;border:1px solid {b_color}33;"
+                            f"color:{b_color};background:{b_color}11'>"
+                            f"{b_icon} {partner}</span>"
+                        )
+                    profiles_html += (
+                        f"<div class='mini-profile'>"
+                        f"<div class='mp-country'>{c['country']}</div>"
+                        f"<div class='mp-leader'>{leader['name']}, {leader['title']}</div>"
+                        f"<div class='mp-tags'>{tags}</div>"
+                        f"</div>"
+                    )
+
             st.markdown(
                 f"""
-                <div class="card">
-                    <div class="card-label"><i class="icon-bookmark"></i>Reference Sources</div>
-                    {links_html}
+                <div class="stCard">
+                    <div class="card-label"><i class="icon-users"></i>Active Geopolitical Profiles</div>
+                    {profiles_html}
                 </div>
                 """,
                 unsafe_allow_html=True,
             )
+
+            # Live Data Sources panel
+            if links:
+                links_html = ""
+                for url in links:
+                    links_html += (
+                        f'<div class="link-item">'
+                        f'<i class="icon-external-link" style="color:var(--accent-blue);font-size:.75rem;flex-shrink:0"></i>'
+                        f'<a href="{url}" target="_blank" rel="noopener">{url}</a>'
+                        f"</div>"
+                    )
+                st.markdown(
+                    f"""
+                    <div class="stCard">
+                        <div class="card-label"><i class="icon-bookmark"></i>Live Data Sources</div>
+                        {links_html}
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
