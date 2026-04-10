@@ -1,11 +1,18 @@
+import json
+from pathlib import Path
+
 import streamlit as st
 from simulation import run_simulation
+
+_PROFILES_PATH = Path(__file__).parent / "profiles.json"
+with open(_PROFILES_PATH, "r", encoding="utf-8") as _f:
+    profiles = json.load(_f)
 
 st.set_page_config(
     page_title="What If: Global Consequence Engine",
     page_icon="🌐",
     layout="wide",
-    initial_sidebar_state="collapsed",
+    initial_sidebar_state="expanded",
 )
 
 st.markdown(
@@ -234,6 +241,45 @@ st.markdown(
     """,
     unsafe_allow_html=True,
 )
+
+# ── Sidebar: Active Geopolitical Profiles ────────────────────────────────────────
+CONTINENT_ICONS = {
+    "North America": "\U0001F5FD",
+    "South America": "\U0001F30E",
+    "Europe": "\U0001F3F0",
+    "Africa": "\U0001F30D",
+    "Asia": "\U0001F3EF",
+    "Oceania": "\U0001F30A",
+}
+
+with st.sidebar:
+    st.markdown(
+        "<div style='font-size:.7rem;font-weight:600;letter-spacing:.1em;"
+        "text-transform:uppercase;color:#64748b;margin-bottom:.4rem'>"
+        "Active Geopolitical Profiles</div>",
+        unsafe_allow_html=True,
+    )
+    st.caption(f"{sum(len(c) for c in profiles.values())} nations across {len(profiles)} continents")
+
+    for continent, countries in profiles.items():
+        icon = CONTINENT_ICONS.get(continent, "\U0001F310")
+        with st.expander(f"{icon}  {continent}  ({len(countries)})", expanded=False):
+            for country, info in countries.items():
+                st.markdown(f"**{country}**")
+                st.markdown(
+                    f"<span style='color:#94a3b8;font-size:.84rem'>"
+                    f"{info['personality']}</span>",
+                    unsafe_allow_html=True,
+                )
+                red_lines_md = "".join(
+                    f"<li style='color:#ef4444;font-size:.8rem'>{rl}</li>"
+                    for rl in info["red_lines"]
+                )
+                st.markdown(
+                    f"<ul style='margin:.2rem 0 .8rem;padding-left:1.2rem'>"
+                    f"{red_lines_md}</ul>",
+                    unsafe_allow_html=True,
+                )
 
 # ── Header ──────────────────────────────────────────────────────────────────────
 st.markdown(

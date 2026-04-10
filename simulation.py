@@ -5,7 +5,7 @@ from dotenv import load_dotenv
 from langchain_openai import ChatOpenAI
 from crewai import Agent, Task, Crew, Process
 
-from prompts import AGENT_PROMPTS
+from prompts import get_continent_prompt, SYNTHESIZER_DIRECTOR_PROMPT
 
 load_dotenv()
 
@@ -26,9 +26,9 @@ CONTINENT_NAMES = [
 
 continent_agents = {
     name: Agent(
-        role=f"{name} Consensus Analyst",
-        goal=f"React to global scenarios as the unified voice of {name}.",
-        backstory=AGENT_PROMPTS[name],
+        role=f"{name} Regional Council",
+        goal=f"React to global scenarios as the unified voice of {name}, citing constituent nations.",
+        backstory=get_continent_prompt(name),
         llm=llm,
         verbose=False,
     )
@@ -38,7 +38,7 @@ continent_agents = {
 director_agent = Agent(
     role="Synthesizer Director",
     goal="Synthesize all continental reactions into a single analytical JSON brief.",
-    backstory=AGENT_PROMPTS["Synthesizer_Director"],
+    backstory=SYNTHESIZER_DIRECTOR_PROMPT,
     llm=llm,
     verbose=False,
 )
@@ -51,10 +51,14 @@ def run_simulation(user_scenario: str) -> dict:
             description=(
                 f"The user has posed the following global 'What If' scenario:\n\n"
                 f"\"{user_scenario}\"\n\n"
-                f"As the {name} consensus analyst, provide your region's reaction "
-                f"in 2-3 sentences."
+                f"As the {name} Regional Council, provide your region's reaction "
+                f"in 2-3 paragraphs, explicitly citing how specific constituent "
+                f"nations and their red lines influenced the consensus."
             ),
-            expected_output=f"A 2-3 sentence reaction from the {name} perspective.",
+            expected_output=(
+                f"A 2-3 paragraph reaction from the {name} Regional Council, "
+                f"referencing specific nations and their red lines."
+            ),
             agent=continent_agents[name],
         )
         continent_tasks.append(task)

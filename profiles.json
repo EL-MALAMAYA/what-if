@@ -1,0 +1,124 @@
+{
+  "North America": {
+    "USA": {
+      "personality": "A global hegemon prioritizing technological supremacy, dollar dominance, military deterrence, and the preservation of a US-led rules-based international order.",
+      "red_lines": [
+        "Direct military threat to NATO allies or US overseas territories",
+        "Displacement of the US dollar as the world's primary reserve currency",
+        "A hostile power achieving semiconductor or AI superiority"
+      ]
+    },
+    "Canada": {
+      "personality": "A multilateral middle power balancing deep economic integration with the US against an independent foreign policy rooted in climate leadership and Arctic sovereignty.",
+      "red_lines": [
+        "Unilateral US trade actions that threaten Canadian resource exports",
+        "Foreign encroachment on Arctic shipping routes or territorial waters"
+      ]
+    }
+  },
+  "South America": {
+    "Brazil": {
+      "personality": "A regional anchor seeking permanent UN Security Council membership while leveraging Amazon stewardship and agricultural exports for global influence.",
+      "red_lines": [
+        "International attempts to override Brazilian sovereignty over the Amazon",
+        "Trade policies that undercut Brazilian agribusiness competitiveness"
+      ]
+    },
+    "Argentina": {
+      "personality": "A resource-rich nation focused on stabilizing its currency, restructuring sovereign debt, and expanding lithium and energy exports to regain economic credibility.",
+      "red_lines": [
+        "IMF conditionality that triggers domestic social unrest",
+        "Foreign corporate control over critical lithium reserves in the Lithium Triangle"
+      ]
+    }
+  },
+  "Europe": {
+    "Germany": {
+      "personality": "The EU's industrial engine pursuing energy transition, fiscal discipline, and strategic autonomy while managing dependence on Chinese export markets.",
+      "red_lines": [
+        "Disruption of critical supply chains for automotive and manufacturing sectors",
+        "Erosion of EU regulatory sovereignty by external trade agreements"
+      ]
+    },
+    "France": {
+      "personality": "A nuclear-armed UN Security Council member championing European strategic autonomy, Francophone influence in Africa, and a strong EU defense identity.",
+      "red_lines": [
+        "Marginalization of French influence in West and Central Africa",
+        "NATO decisions that bypass European consultation"
+      ]
+    }
+  },
+  "Africa": {
+    "Nigeria": {
+      "personality": "West Africa's largest economy leveraging its oil reserves and massive youth population to assert regional leadership through ECOWAS and the African Continental Free Trade Area.",
+      "red_lines": [
+        "External military intervention in West African states without AU consent",
+        "Oil market manipulation that destabilizes the Nigerian naira"
+      ]
+    },
+    "South Africa": {
+      "personality": "A BRICS member and continental diplomatic heavyweight advocating for debt relief, equitable vaccine access, and reform of global financial institutions.",
+      "red_lines": [
+        "Western sanctions that target South African trade relationships with BRICS partners",
+        "Exploitation of African critical minerals without local beneficiation requirements"
+      ]
+    }
+  },
+  "Asia": {
+    "China": {
+      "personality": "A rising superpower pursuing technological self-sufficiency, Belt and Road expansion, yuan internationalization, and the reunification of Taiwan under a one-China framework.",
+      "red_lines": [
+        "Formal diplomatic recognition of Taiwanese independence by major powers",
+        "US-led semiconductor export controls that threaten Chinese tech advancement",
+        "Military alliance encirclement in the South China Sea or Taiwan Strait"
+      ]
+    },
+    "Singapore": {
+      "personality": "A strategically neutral city-state serving as ASEAN's financial hub, balancing deep trade ties with both the US and China while safeguarding maritime freedom in the Strait of Malacca.",
+      "red_lines": [
+        "Militarization of the Strait of Malacca by any external power",
+        "Coercion to choose sides in the US-China rivalry that undermines ASEAN centrality"
+      ]
+    },
+    "The Philippines": {
+      "personality": "A treaty ally of the United States asserting sovereignty over contested South China Sea territories while managing economic dependence on Chinese trade and infrastructure investment.",
+      "red_lines": [
+        "Chinese occupation or construction on Philippine-claimed reefs and shoals",
+        "Withdrawal of US security guarantees under the Mutual Defense Treaty",
+        "Economic coercion that threatens Filipino overseas worker remittances"
+      ]
+    },
+    "Japan": {
+      "personality": "An advanced industrial democracy expanding its defense posture, deepening the US-Japan alliance, and competing for semiconductor leadership while managing demographic decline.",
+      "red_lines": [
+        "A nuclear or ballistic missile provocation from North Korea targeting Japanese territory",
+        "Unilateral changes to the status quo in the Taiwan Strait that threaten regional stability",
+        "Trade restrictions that cut off Japanese access to critical energy imports"
+      ]
+    },
+    "Iran": {
+      "personality": "A theocratic regional power projecting influence through proxy networks across the Middle East while pursuing nuclear latency and resisting Western sanctions regimes.",
+      "red_lines": [
+        "Military strikes on Iranian nuclear facilities by Israel or the US",
+        "Regime-change operations or support for domestic separatist movements",
+        "Sanctions escalation that completely severs Iranian oil exports to China and India"
+      ]
+    }
+  },
+  "Oceania": {
+    "Australia": {
+      "personality": "A US-allied middle power balancing AUKUS security commitments with deep economic dependence on Chinese commodity demand while championing Pacific Island climate resilience.",
+      "red_lines": [
+        "Chinese military basing in the Pacific Islands region",
+        "Trade embargoes targeting Australian critical mineral or agricultural exports"
+      ]
+    },
+    "New Zealand": {
+      "personality": "An independent-minded Pacific nation prioritizing climate diplomacy, indigenous rights, and multilateral trade while maintaining a nuclear-free security posture.",
+      "red_lines": [
+        "Nuclear weapons testing or transit in the South Pacific",
+        "Collapse of Pacific Island nations due to climate inaction by major emitters"
+      ]
+    }
+  }
+}
