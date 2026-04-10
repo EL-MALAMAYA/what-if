@@ -21,6 +21,7 @@ st.set_page_config(
 
 st.markdown(
     """
+    <link href="https://unpkg.com/lucide-static@latest/font/lucide.css" rel="stylesheet">
     <style>
     @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
 
@@ -222,10 +223,7 @@ st.markdown(
         font-weight: 500;
     }
     .link-item a:hover { text-decoration: underline; }
-    .link-dot {
-        width: 6px; height: 6px;
-        border-radius: 50%;
-        background: var(--accent-blue);
+    .link-item [class^="icon-"] {
         flex-shrink: 0;
     }
 
@@ -238,6 +236,16 @@ st.markdown(
 
     /* ---------- spinner ---------- */
     .stSpinner > div { color: var(--accent-cyan) !important; }
+
+    /* ---------- lucide icon helpers ---------- */
+    [class^="icon-"], [class*=" icon-"] {
+        vertical-align: -0.125em;
+    }
+    .card-label [class^="icon-"], .card-label [class*=" icon-"] {
+        margin-right: .35rem;
+        font-size: .8rem;
+        opacity: .7;
+    }
 
     /* hide streamlit chrome */
     #MainMenu, footer, .stDeployButton { display: none !important; }
@@ -260,6 +268,7 @@ with st.sidebar:
     st.markdown(
         "<div style='font-size:.7rem;font-weight:600;letter-spacing:.1em;"
         "text-transform:uppercase;color:#64748b;margin-bottom:.4rem'>"
+        "<i class='icon-users' style='font-size:.7rem;margin-right:.35rem'></i>"
         "Active Geopolitical Profiles</div>",
         unsafe_allow_html=True,
     )
@@ -276,7 +285,8 @@ with st.sidebar:
                     unsafe_allow_html=True,
                 )
                 red_lines_md = "".join(
-                    f"<li style='color:#ef4444;font-size:.8rem'>{rl}</li>"
+                    f"<li style='color:#ef4444;font-size:.8rem'>"
+                    f"<i class='icon-shield-alert' style='font-size:.7rem;margin-right:.3rem;opacity:.7'></i>{rl}</li>"
                     for rl in info["red_lines"]
                 )
                 st.markdown(
@@ -289,7 +299,7 @@ with st.sidebar:
 st.markdown(
     """
     <div class="dash-header">
-        <div class="tag">Multi-Agent Geopolitical Intelligence</div>
+        <div class="tag"><i class="icon-radar" style="font-size:.75rem;margin-right:.3rem"></i>Multi-Agent Geopolitical Intelligence</div>
         <h1>What If: Global Consequence Engine</h1>
         <p class="sub">Pose a hypothetical scenario. Six continental AI analysts react. A director synthesizes the fallout.</p>
     </div>
@@ -303,7 +313,7 @@ if _missing:
     st.markdown(
         f"""
         <div class="card" style="border-color:var(--accent-amber)">
-            <div class="card-label" style="color:var(--accent-amber)">Configuration Required</div>
+            <div class="card-label" style="color:var(--accent-amber)"><i class="icon-alert-triangle"></i>Configuration Required</div>
             <div style="color:var(--text-primary);font-size:1rem;font-weight:600;margin-bottom:.5rem">
                 Missing environment variable{'s' if len(_missing) > 1 else ''}:
                 <code style="color:var(--accent-red)">{', '.join(_missing)}</code>
@@ -348,7 +358,7 @@ if run_clicked:
         st.markdown(
             f"""
             <div class="card">
-                <div class="card-label">Prediction</div>
+                <div class="card-label"><i class="icon-crosshair"></i>Prediction</div>
                 <div class="prediction-text">{prediction}</div>
             </div>
             """,
@@ -381,7 +391,7 @@ if run_clicked:
             st.markdown(
                 f"""
                 <div class="card">
-                    <div class="card-label">Escalation Probability</div>
+                    <div class="card-label"><i class="icon-activity"></i>Escalation Probability</div>
                     <div class="prob-wrap">
                         <div class="prob-ring">
                             <svg width="100" height="100" viewBox="0 0 100 100">
@@ -412,7 +422,7 @@ if run_clicked:
             st.markdown(
                 f"""
                 <div class="card">
-                    <div class="card-label">Global Impact Report</div>
+                    <div class="card-label"><i class="icon-file-text"></i>Global Impact Report</div>
                     <div class="report-text">{body_html}</div>
                 </div>
                 """,
@@ -426,14 +436,14 @@ if run_clicked:
             for url in links:
                 links_html += (
                     f'<div class="link-item">'
-                    f'<div class="link-dot"></div>'
+                    f'<i class="icon-external-link" style="color:var(--accent-blue);font-size:.8rem;flex-shrink:0"></i>'
                     f'<a href="{url}" target="_blank" rel="noopener">{url}</a>'
                     f"</div>"
                 )
             st.markdown(
                 f"""
                 <div class="card">
-                    <div class="card-label">Reference Sources</div>
+                    <div class="card-label"><i class="icon-bookmark"></i>Reference Sources</div>
                     {links_html}
                 </div>
                 """,
