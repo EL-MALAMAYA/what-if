@@ -32,13 +32,19 @@ def _build_crew():
     if _crew_cache:
         return _crew_cache["continent_agents"], _crew_cache["director_agent"]
 
-    from langchain_openai import ChatOpenAI
-    from crewai import Agent
+    from crewai import Agent, LLM
 
-    llm = ChatOpenAI(
-        model="ZAI: GLM-5.1",
+    llm = LLM(
+        model="openai/ZAI: GLM-5.1",
         base_url=os.getenv("GMI_ENDPOINT_URL"),
         api_key=os.getenv("GMI_API_KEY"),
+    )
+
+    director_llm = LLM(
+        model="openai/ZAI: GLM-5.1",
+        base_url=os.getenv("GMI_ENDPOINT_URL"),
+        api_key=os.getenv("GMI_API_KEY"),
+        response_format={"type": "json_object"},
     )
 
     continent_agents = {
@@ -56,7 +62,7 @@ def _build_crew():
         role="Synthesizer Director",
         goal="Synthesize all continental reactions into a single analytical JSON brief.",
         backstory=SYNTHESIZER_DIRECTOR_PROMPT,
-        llm=llm,
+        llm=director_llm,
         verbose=False,
     )
 
