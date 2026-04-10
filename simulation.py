@@ -19,9 +19,20 @@ CONTINENT_NAMES = [
 _crew_cache: dict = {}
 
 
-def _crew_config_key() -> tuple:
-    """Invalidate cached Crew when model, endpoint, or JSON-mode settings change."""
+def _crew_config_key(provider: str, claude_api_key: str | None = None) -> tuple:
+    """Invalidate cached Crew when provider/config changes."""
+    if provider == "claude":
+        return (
+            provider,
+            claude_api_key or os.getenv("CLAUDE_API_KEY", ""),
+            os.getenv("CLAUDE_MODEL", ""),
+            os.getenv("GMI_TIMEOUT", ""),
+            os.getenv("GMI_MAX_RETRIES", ""),
+            os.getenv("GMI_MAX_TOKENS", ""),
+            os.getenv("GMI_TEMPERATURE", ""),
+        )
     return (
+        provider,
         os.getenv("GMI_API_KEY", ""),
         os.getenv("GMI_ENDPOINT_URL", ""),
         os.getenv("GMI_MODEL", ""),
@@ -62,8 +73,12 @@ def _llm_generation_kwargs() -> dict:
     }
 
 
-def _get_missing_vars() -> list[str]:
+def _get_missing_vars(provider: str = "gmi", claude_api_key: str | None = None) -> list[str]:
     missing = []
+    if provider == "claude":
+        if not (claude_api_key or os.getenv("CLAUDE_API_KEY")):
+            missing.append("CLAUDE_API_KEY")
+        return missing
     if not os.getenv("GMI_API_KEY"):
         missing.append("GMI_API_KEY")
     if not os.getenv("GMI_ENDPOINT_URL"):
@@ -71,49 +86,62 @@ def _get_missing_vars() -> list[str]:
     return missing
 
 
-def _build_crew():
-    cfg = _crew_config_key()
+def _build_crew(provider: str = "gmi", claude_api_key: str | None = None):
+    cfg = _crew_config_key(provider, claude_api_key)
     if _crew_cache.get("config_key") == cfg and "continent_agents" in _crew_cache:
         return _crew_cache["continent_agents"], _crew_cache["director_agent"]
 
     from crewai import Agent, LLM
 
-    _api_key = os.getenv("GMI_API_KEY", "")
-    _base_url = os.getenv("GMI_ENDPOINT_URL", "")
-    # Must match the model id from GET {GMI_ENDPOINT_URL}/models (GMI Cloud Inference Engine).
-    _model = os.getenv("GMI_MODEL", "deepseek-ai/DeepSeek-R1")
-    # Many OpenAI-compatible models (including some DeepSeek deployments) return HTTP 400 if
-    # response_format=json_object is sent. Enable only for models that support it (e.g. some GLM/GPT).
-    _json_mode = os.getenv("GMI_USE_JSON_RESPONSE_FORMAT", "").lower() in (
-        "1",
-        "true",
-        "yes",
-    )
-
     _client = _llm_client_kwargs()
     _gen = _llm_generation_kwargs()
 
-    llm = LLM(
-        model=_model,
-        provider="openai",
-        base_url=_base_url,
-        api_key=_api_key,
-        **_client,
-        **_gen,
-    )
-
-    director_kwargs = {
-        "model": _model,
-        "provider": "openai",
-        "base_url": _base_url,
-        "api_key": _api_key,
-        **_client,
-        **_gen,
-    }
-    if _json_mode:
-        director_kwargs["response_format"] = {"type": "json_object"}
-
-    director_llm = LLM(**director_kwargs)
+    if provider == "claude":
+        _api_key = claude_api_key or os.getenv("CLAUDE_API_KEY", "")
+        _model = os.getenv("CLAUDE_MODEL", "claude-3-5-sonnet-20241022")
+        llm = LLM(
+            model=_model,
+            provider="anthropic",
+            api_key=_api_key,
+            **_client,
+            **_gen,
+        )
+        director_llm = LLM(
+            model=_model,
+            provider="anthropic",
+            api_key=_api_key,
+            **_client,
+            **_gen,
+        )
+    else:
+        _api_key = os.getenv("GMI_API_KEY", "")
+        _base_url = os.getenv("GMI_ENDPOINT_URL", "")
+        # Must match the model id from GET {GMI_ENDPOINT_URL}/models.
+        _model = os.getenv("GMI_MODEL", "deepseek-ai/DeepSeek-R1")
+        _json_mode = os.getenv("GMI_USE_JSON_RESPONSE_FORMAT", "").lower() in (
+            "1",
+            "true",
+            "yes",
+        )
+        llm = LLM(
+            model=_model,
+            provider="openai",
+            base_url=_base_url,
+            api_key=_api_key,
+            **_client,
+            **_gen,
+        )
+        director_kwargs = {
+            "model": _model,
+            "provider": "openai",
+            "base_url": _base_url,
+            "api_key": _api_key,
+            **_client,
+            **_gen,
+        }
+        if _json_mode:
+            director_kwargs["response_format"] = {"type": "json_object"}
+        director_llm = LLM(**director_kwargs)
 
     continent_agents = {
         name: Agent(
@@ -140,10 +168,18 @@ def _build_crew():
     return continent_agents, director_agent
 
 
-def run_simulation(user_scenario: str) -> dict:
+def run_simulation(
+    user_scenario: str,
+    provider: str = "gmi",
+    claude_api_key: str | None = None,
+) -> dict:
     from crewai import Task, Crew, Process
 
-    missing = _get_missing_vars()
+    provider = (provider or "gmi").lower().strip()
+    if provider not in ("gmi", "claude"):
+        provider = "gmi"
+
+    missing = _get_missing_vars(provider=provider, claude_api_key=claude_api_key)
     if missing:
         return {
             "prediction": "Simulation unavailable — missing environment variables.",
@@ -153,7 +189,10 @@ def run_simulation(user_scenario: str) -> dict:
             "links": [],
         }
 
-    continent_agents, director_agent = _build_crew()
+    continent_agents, director_agent = _build_crew(
+        provider=provider,
+        claude_api_key=claude_api_key,
+    )
 
     continent_tasks = []
     for name in CONTINENT_NAMES:
@@ -200,13 +239,19 @@ def run_simulation(user_scenario: str) -> dict:
         raw_output = result.raw
     except Exception as e:
         err = str(e)
-        hint = (
-            " Confirm GMI_MODEL matches an id from GET /v1/models. "
-            "Leave GMI_USE_JSON_RESPONSE_FORMAT unset unless your model supports JSON mode. "
-            "If you see max_retries_exceeded or status 523, the upstream model may be overloaded or too slow: "
-            "raise GMI_TIMEOUT (e.g. 300) and GMI_MAX_RETRIES (e.g. 8), or switch to a faster model "
-            "such as deepseek-ai/DeepSeek-V3."
-        )
+        if provider == "claude":
+            hint = (
+                " Confirm CLAUDE_API_KEY is valid and CLAUDE_MODEL is supported by your Anthropic account. "
+                "You can also try a different model (e.g. claude-3-5-sonnet-20241022)."
+            )
+        else:
+            hint = (
+                " Confirm GMI_MODEL matches an id from GET /v1/models. "
+                "Leave GMI_USE_JSON_RESPONSE_FORMAT unset unless your model supports JSON mode. "
+                "If you see max_retries_exceeded or status 523, the upstream model may be overloaded or too slow: "
+                "raise GMI_TIMEOUT (e.g. 300) and GMI_MAX_RETRIES (e.g. 8), or switch to a faster model "
+                "such as deepseek-ai/DeepSeek-V3."
+            )
         return {
             "prediction": "Simulation failed — LLM request was rejected.",
             "report": f"{err}\n\n{hint}",

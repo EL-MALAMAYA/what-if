@@ -565,29 +565,20 @@ st.markdown(
 )
 
 # ── Environment check ────────────────────────────────────────────────────────────
-_missing = _get_missing_vars()
-if _missing:
+_missing_gmi = _get_missing_vars(provider="gmi")
+if _missing_gmi:
     st.markdown(
         f"""
         <div class="card" style="border-color:var(--accent-amber)">
-            <div class="card-label" style="color:var(--accent-amber)"><i class="icon-alert-triangle"></i>Configuration Required</div>
-            <div style="color:var(--text-primary);font-size:1rem;font-weight:600;margin-bottom:.5rem">
-                Missing environment variable{'s' if len(_missing) > 1 else ''}:
-                <code style="color:var(--accent-red)">{', '.join(_missing)}</code>
-            </div>
-            <div style="color:var(--text-secondary);font-size:.9rem;line-height:1.6">
-                The simulation engine cannot connect to the GMI Cloud endpoint without these credentials.
-                <br>Please set them in one of the following locations:
-                <ul style="margin-top:.4rem">
-                    <li>Your hosting platform's environment / secrets dashboard (Streamlit Cloud, Railway, etc.)</li>
-                    <li>A <code>.env</code> file in the project root for local development</li>
-                </ul>
+            <div class="card-label" style="color:var(--accent-amber)"><i class="icon-alert-triangle"></i>GMI Configuration Notice</div>
+            <div style="color:var(--text-primary);font-size:.92rem;line-height:1.6">
+                Missing GMI variable{'s' if len(_missing_gmi) > 1 else ''}: <code style="color:var(--accent-red)">{', '.join(_missing_gmi)}</code>.
+                <br>You can still run simulations using the Claude provider toggle below.
             </div>
         </div>
         """,
         unsafe_allow_html=True,
     )
-    st.stop()
 
 # ── Control Panel ────────────────────────────────────────────────────────────────
 st.markdown(
@@ -600,6 +591,22 @@ scenario = st.text_area(
     placeholder="e.g. What if the US dollar lost its reserve currency status overnight?",
     height=100,
 )
+provider_label = st.radio(
+    "model_provider",
+    options=["GMI Cloud", "Claude API"],
+    horizontal=True,
+)
+selected_provider = "claude" if provider_label == "Claude API" else "gmi"
+claude_key_input = None
+if selected_provider == "claude":
+    claude_key_input = st.text_input(
+        "Claude API Key (optional if CLAUDE_API_KEY is set in environment)",
+        type="password",
+        placeholder="sk-ant-api03-...",
+    )
+    if _get_missing_vars(provider="claude", claude_api_key=claude_key_input):
+        st.info("Enter a Claude API key above or set CLAUDE_API_KEY in environment variables.")
+
 col_l, col_btn, col_r = st.columns([3, 2, 3])
 with col_btn:
     run_clicked = st.button("Run Simulation")
@@ -611,7 +618,11 @@ if run_clicked:
         st.warning("Please enter a scenario before running the simulation.")
     else:
         with st.spinner("Simulating global geopolitical fallout..."):
-            data = run_simulation(scenario.strip())
+            data = run_simulation(
+                scenario.strip(),
+                provider=selected_provider,
+                claude_api_key=(claude_key_input.strip() if claude_key_input else None),
+            )
 
         st.markdown('<hr class="divider">', unsafe_allow_html=True)
 

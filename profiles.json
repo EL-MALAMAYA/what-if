@@ -405,59 +405,114 @@
       },
       "recent_events": [
         {
-          "event": "Sahel repositioning after Niger withdrawal",
-          "type": "military",
+          "event": "Continued support for Ukraine through EU and NATO coordination",
+          "type": "diplomatic",
           "impact_level": "high",
-          "impact": "African strategy reset"
+          "impact": "Sustains European deterrence and alliance posture"
         },
         {
-          "event": "European AI and cloud sovereignty push",
-          "type": "technology",
+          "event": "Middle East diplomacy focused on humanitarian concerns and regional de-escalation",
+          "type": "diplomatic",
           "impact_level": "medium",
-          "impact": "Regulatory competition"
+          "impact": "Attempts to reduce spillover escalation risks"
+        },
+        {
+          "event": "Domestic political pressure affecting broader strategic bandwidth",
+          "type": "political",
+          "impact_level": "medium",
+          "impact": "Constricts rapid external policy maneuverability"
         }
       ],
       "official_statements": [
         {
           "source": "leader",
-          "content": "Europe must not be a vassal; strategic capacity required",
-          "tone": "assertive"
+          "content": "France supports European strategic autonomy, continued support for Ukraine, and diplomatic efforts to contain Middle East escalation.",
+          "tone": "diplomatic"
+        },
+        {
+          "source": "ministry",
+          "content": "Official statements emphasize international law, multilateral diplomacy, and coordinated sanctions where applicable.",
+          "tone": "diplomatic"
         }
       ],
       "core_interests": [
-        "European strategic autonomy",
-        "Francophone influence in Africa",
-        "Nuclear deterrence independence",
-        "EU digital sovereignty"
+        "European security and cohesion",
+        "Strategic autonomy within the West",
+        "Maintaining diplomatic influence in Europe, Africa, and the Middle East"
       ],
       "red_lines": [
-        "Marginalization of French influence in Africa",
-        "NATO decisions that bypass European consultation"
+        "Any major breach of European territorial security architecture",
+        "Large-scale maritime disruption around key Mediterranean trade routes"
       ],
-      "alliances": [
-        "Germany",
-        "United States"
-      ],
+      "alliances": [],
       "enemies": [],
       "neutral_relations": [
-        "China"
+        "United States",
+        "India",
+        "Saudi Arabia",
+        "Singapore",
+        "Israel"
       ],
       "official_social_channels": [
         {
-          "role": "Government portal",
-          "platform": "web",
-          "handle": "—",
-          "url": "https://www.gov/",
-          "verification_hint": "Replace with national official domain."
+          "role": "President",
+          "platform": "X",
+          "handle": "@EmmanuelMacron",
+          "url": "https://x.com/EmmanuelMacron",
+          "verification_hint": "Verify via Elysee social links."
+        },
+        {
+          "role": "Ministry for Europe and Foreign Affairs",
+          "platform": "X",
+          "handle": "@francediplo_EN",
+          "url": "https://x.com/francediplo_EN",
+          "verification_hint": "Verify on France Diplomatie."
         }
       ],
       "supplementary_sources": {
-        "purpose": "Supplementary context for agents; verify against official sources.",
-        "official_websites": [],
+        "purpose": "RAG and agent differentiation; prioritize Elysee and foreign ministry texts, especially on EU, sanctions, and security policy.",
+        "official_websites": [
+          {
+            "category": "Executive",
+            "name": "Elysee",
+            "url": "https://www.elysee.fr/en",
+            "content_use": "Speeches, communiques, readouts"
+          },
+          {
+            "category": "Foreign Ministry",
+            "name": "France Diplomatie",
+            "url": "https://www.diplomatie.gouv.fr/en/",
+            "content_use": "Policy statements, travel advice, official diplomacy"
+          }
+        ],
+        "official_multimedia": [
+          "Elysee and foreign ministry speech videos and official transcripts"
+        ],
+        "news_wires": [
+          "Reuters, AFP for diplomatic developments and verification"
+        ],
+        "interviews_and_transcripts": [
+          "Presidential press conferences and interviews",
+          "Foreign ministry statements and briefings"
+        ],
+        "laws_and_regulations": [
+          {
+            "topic": "EU legal and sanctions instruments",
+            "url": "https://eur-lex.europa.eu/",
+            "notes": "Important for France's external policy environment"
+          }
+        ],
         "rag_tiers": {
-          "tier_a_primary": [],
-          "tier_b_secondary": [],
-          "tier_c_social": []
+          "tier_a_primary": [
+            "elysee.fr/en",
+            "diplomatie.gouv.fr/en"
+          ],
+          "tier_b_secondary": [
+            "AFP/Reuters quoting officials verbatim"
+          ],
+          "tier_c_social": [
+            "Social posts for tone and public framing only"
+          ]
         }
       },
       "decision_style": {
@@ -805,40 +860,49 @@
       "country": "Philippines",
       "region": "Asia",
       "leader": {
-        "name": "Ferdinand Marcos Jr.",
+        "name": "Ferdinand R. Marcos Jr.",
         "title": "President"
       },
       "recent_events": [
         {
-          "event": "Expanded EDCA bases for US rotational presence",
+          "event": "Continued confrontations with China in the South China Sea, including coast guard and resupply incidents",
           "type": "military",
           "impact_level": "high",
-          "impact": "Alliance deepening"
+          "impact": "Persistent maritime flashpoint and alliance stress test"
         },
         {
-          "event": "Coast guard confrontations in South China Sea",
-          "type": "security",
+          "event": "Expanded defense cooperation with the United States through EDCA and joint exercises",
+          "type": "diplomatic",
           "impact_level": "high",
-          "impact": "International attention"
+          "impact": "Stronger deterrence posture and interoperability"
+        },
+        {
+          "event": "Ongoing balancing between maritime security concerns and regional economic dependence",
+          "type": "economic",
+          "impact_level": "medium",
+          "impact": "Constrains strategic room for maneuver"
         }
       ],
       "official_statements": [
         {
+          "source": "leader",
+          "content": "The Philippines will defend its sovereign rights and maritime entitlements in accordance with international law and the arbitral ruling.",
+          "tone": "defensive"
+        },
+        {
           "source": "government",
-          "content": "Defend every inch of territory; US alliance is foundational",
-          "tone": "assertive"
+          "content": "Manila emphasizes alliance coordination, freedom of navigation, and peaceful dispute resolution while rejecting coercive actions at sea.",
+          "tone": "diplomatic"
         }
       ],
       "core_interests": [
-        "South China Sea sovereignty",
-        "US Mutual Defense Treaty",
-        "OFW remittance protection",
-        "Infrastructure diversification"
+        "Protecting maritime rights in the South China Sea",
+        "Strengthening deterrence through alliance partnerships",
+        "Maintaining economic growth and domestic stability"
       ],
       "red_lines": [
-        "Chinese occupation of Philippine-claimed features",
-        "Withdrawal of US security guarantees",
-        "Economic coercion against overseas workers"
+        "Permanent occupation of Philippine-claimed maritime features",
+        "Sustained blockade of key resupply routes to outposts"
       ],
       "alliances": [
         "United States"
@@ -847,30 +911,103 @@
       "neutral_relations": [
         "China",
         "Japan",
-        "Singapore"
+        "Singapore",
+        "India",
+        "Saudi Arabia"
       ],
       "official_social_channels": [
         {
-          "role": "Government portal",
-          "platform": "web",
-          "handle": "—",
-          "url": "https://www.gov/",
-          "verification_hint": "Replace with national official domain."
+          "role": "President",
+          "platform": "Facebook",
+          "handle": "bongbongmarcos",
+          "url": "https://www.facebook.com/bongbongmarcos",
+          "verification_hint": "Verify with Presidential Communications Office and official government pages."
+        },
+        {
+          "role": "Official Gazette",
+          "platform": "Website",
+          "handle": "Official Gazette",
+          "url": "https://www.officialgazette.gov.ph/",
+          "verification_hint": "Primary source for speeches, executive actions, and official statements."
+        },
+        {
+          "role": "Department of Foreign Affairs",
+          "platform": "Facebook",
+          "handle": "dfaphl",
+          "url": "https://www.facebook.com/dfaphl",
+          "verification_hint": "Verify through DFA official pages."
         }
       ],
       "supplementary_sources": {
-        "purpose": "Supplementary context for agents; verify against official sources.",
-        "official_websites": [],
+        "purpose": "RAG and agent differentiation; prioritize official executive, DFA, defense, and coast guard materials on maritime disputes and alliance posture.",
+        "official_websites": [
+          {
+            "category": "Executive",
+            "name": "Official Gazette of the Republic of the Philippines",
+            "url": "https://www.officialgazette.gov.ph/",
+            "content_use": "Speeches, proclamations, executive orders, official government statements"
+          },
+          {
+            "category": "Foreign Ministry",
+            "name": "Department of Foreign Affairs",
+            "url": "https://dfa.gov.ph/",
+            "content_use": "Press releases, treaty and sovereignty statements"
+          },
+          {
+            "category": "Defense",
+            "name": "Department of National Defense",
+            "url": "https://www.dnd.gov.ph/",
+            "content_use": "Defense policy, alliance cooperation, security statements"
+          },
+          {
+            "category": "Maritime Security",
+            "name": "Philippine Coast Guard",
+            "url": "https://pcg.gov.ph/",
+            "content_use": "Operational updates and incident reporting"
+          }
+        ],
+        "official_multimedia": [
+          "Presidential Communications Office videos and speech archives",
+          "DFA, DND, and Coast Guard press briefings"
+        ],
+        "news_wires": [
+          "Reuters, AP, AFP for South China Sea developments and verification"
+        ],
+        "interviews_and_transcripts": [
+          "Presidential speeches and official statements on Official Gazette",
+          "DFA and defense press briefings on maritime incidents"
+        ],
+        "laws_and_regulations": [
+          {
+            "topic": "South China Sea Arbitral Award",
+            "url": "https://pca-cpa.org/en/cases/7/",
+            "notes": "Core legal reference for maritime rights and sovereignty framing"
+          },
+          {
+            "topic": "Executive orders and defense agreements",
+            "url": "https://www.officialgazette.gov.ph/",
+            "notes": "Useful for domestic legal and alliance context"
+          }
+        ],
         "rag_tiers": {
-          "tier_a_primary": [],
-          "tier_b_secondary": [],
-          "tier_c_social": []
+          "tier_a_primary": [
+            "officialgazette.gov.ph",
+            "dfa.gov.ph",
+            "dnd.gov.ph",
+            "pcg.gov.ph"
+          ],
+          "tier_b_secondary": [
+            "Wires quoting Philippine officials verbatim"
+          ],
+          "tier_c_social": [
+            "Social posts for timing, signaling, and imagery only"
+          ]
         }
       },
       "decision_style": {
-        "aggressiveness": "high",
+        "aggressiveness": "medium",
         "risk_tolerance": "medium",
-        "diplomacy_preference": "medium"
+        "diplomacy_preference": "high"
       }
     },
     {
@@ -882,60 +1019,123 @@
       },
       "recent_events": [
         {
-          "event": "Record defense budget and counterstrike debate",
+          "event": "Expanded defense posture and alliance coordination with the United States",
           "type": "military",
           "impact_level": "high",
-          "impact": "Post-war posture shift"
+          "impact": "Higher deterrence and operational readiness"
         },
         {
-          "event": "TSMC/Rapidus fab investments",
-          "type": "technology",
+          "event": "Heightened concern over Taiwan Strait, East China Sea, and maritime security risks",
+          "type": "military",
           "impact_level": "high",
-          "impact": "Chip reshoring"
+          "impact": "Elevates regional contingency planning"
+        },
+        {
+          "event": "Continued economic security measures focused on semiconductors and strategic supply chains",
+          "type": "economic",
+          "impact_level": "medium",
+          "impact": "Industrial resilience against coercive shocks"
         }
       ],
       "official_statements": [
         {
           "source": "government",
-          "content": "Taiwan contingency is existential for Japan; alliance-first defense",
+          "content": "Japan emphasizes deterrence, alliance strength, and a free and open Indo-Pacific.",
           "tone": "defensive"
+        },
+        {
+          "source": "ministry",
+          "content": "Official statements support diplomacy, sanctions coordination where applicable, and maritime stability.",
+          "tone": "diplomatic"
         }
       ],
       "core_interests": [
-        "US–Japan alliance",
-        "Semiconductor and industrial policy",
-        "Constitutional defense reforms",
-        "Energy import security"
+        "Alliance security and deterrence",
+        "Maritime stability and energy route protection",
+        "Economic security and high-tech resilience"
       ],
       "red_lines": [
-        "Nuclear or missile attack on Japan",
-        "Unilateral Taiwan Strait changes threatening stability",
-        "Critical energy import cutoff"
+        "Direct missile/nuclear strike against Japanese territory",
+        "Forced status-quo change in nearby sea lanes threatening national survival"
       ],
       "alliances": [
         "United States"
       ],
       "enemies": [],
       "neutral_relations": [
-        "China",
-        "Singapore"
+        "South Korea",
+        "India",
+        "Singapore",
+        "Saudi Arabia",
+        "Israel"
       ],
       "official_social_channels": [
         {
-          "role": "Government portal",
-          "platform": "web",
-          "handle": "—",
-          "url": "https://www.gov/",
-          "verification_hint": "Replace with national official domain."
+          "role": "Prime Minister's Office",
+          "platform": "X",
+          "handle": "@JPN_PMO",
+          "url": "https://x.com/JPN_PMO",
+          "verification_hint": "Verify through Kantei official channels."
+        },
+        {
+          "role": "Ministry of Foreign Affairs",
+          "platform": "X",
+          "handle": "@MofaJapan_en",
+          "url": "https://x.com/MofaJapan_en",
+          "verification_hint": "Verify on MOFA Japan website."
         }
       ],
       "supplementary_sources": {
-        "purpose": "Supplementary context for agents; verify against official sources.",
-        "official_websites": [],
+        "purpose": "RAG and agent differentiation; prioritize Kantei, MOFA, and MOD official English sources.",
+        "official_websites": [
+          {
+            "category": "Executive",
+            "name": "Prime Minister of Japan and His Cabinet",
+            "url": "https://japan.kantei.go.jp/",
+            "content_use": "Speeches, readouts, official policy lines"
+          },
+          {
+            "category": "Foreign Ministry",
+            "name": "MOFA Japan",
+            "url": "https://www.mofa.go.jp/",
+            "content_use": "Diplomatic statements and policy releases"
+          },
+          {
+            "category": "Defense",
+            "name": "Ministry of Defense",
+            "url": "https://www.mod.go.jp/en/",
+            "content_use": "Defense strategy, briefings, white papers"
+          }
+        ],
+        "official_multimedia": [
+          "Kantei and ministry video statements and transcripts"
+        ],
+        "news_wires": [
+          "Reuters and Nikkei English for economic and diplomatic context"
+        ],
+        "interviews_and_transcripts": [
+          "Prime minister press conferences and speeches",
+          "MOFA statements and ministry briefings"
+        ],
+        "laws_and_regulations": [
+          {
+            "topic": "Diet records and legislation",
+            "url": "https://www.shugiin.go.jp/internet/index.nsf/html/index_e.htm",
+            "notes": "Useful for defense and security law updates"
+          }
+        ],
         "rag_tiers": {
-          "tier_a_primary": [],
-          "tier_b_secondary": [],
-          "tier_c_social": []
+          "tier_a_primary": [
+            "japan.kantei.go.jp",
+            "mofa.go.jp",
+            "mod.go.jp/en"
+          ],
+          "tier_b_secondary": [
+            "Wires quoting Japanese officials verbatim"
+          ],
+          "tier_c_social": [
+            "Social posts for timing and tone only"
+          ]
         }
       },
       "decision_style": {
@@ -1320,6 +1520,771 @@
       }
     },
     {
+      "country": "India",
+      "region": "Asia",
+      "leader": {
+        "name": "Narendra Modi",
+        "title": "Prime Minister"
+      },
+      "recent_events": [
+        {
+          "event": "Continued emphasis on growth, manufacturing, and infrastructure-led development",
+          "type": "economic",
+          "impact_level": "high",
+          "impact": "Raises strategic autonomy through industrial depth"
+        },
+        {
+          "event": "Sustained balancing strategy across the United States, Russia, Gulf states, and regional powers",
+          "type": "diplomatic",
+          "impact_level": "high",
+          "impact": "Preserves multi-alignment flexibility"
+        },
+        {
+          "event": "Ongoing border management with China and Indo-Pacific security engagement",
+          "type": "military",
+          "impact_level": "medium",
+          "impact": "Maintains deterrence while avoiding open conflict"
+        }
+      ],
+      "official_statements": [
+        {
+          "source": "leader",
+          "content": "India emphasizes strategic autonomy, economic modernization, and a multipolar international order.",
+          "tone": "diplomatic"
+        },
+        {
+          "source": "ministry",
+          "content": "Foreign policy messaging highlights diaspora protection, de-escalation diplomacy, and balanced engagement with competing powers.",
+          "tone": "diplomatic"
+        }
+      ],
+      "core_interests": [
+        "Strategic autonomy and flexible balancing",
+        "Energy security and overseas citizen protection",
+        "Sustained growth and industrial competitiveness"
+      ],
+      "red_lines": [
+        "Large-scale cross-border military provocation against Indian territory",
+        "Major disruption of energy and sea-lane access affecting domestic stability"
+      ],
+      "alliances": [],
+      "enemies": [],
+      "neutral_relations": [
+        "United States",
+        "Russia",
+        "Saudi Arabia",
+        "Singapore",
+        "Israel",
+        "Iran",
+        "China"
+      ],
+      "official_social_channels": [
+        {
+          "role": "Prime Minister",
+          "platform": "X",
+          "handle": "@narendramodi",
+          "url": "https://x.com/narendramodi",
+          "verification_hint": "Verify through PMO India official pages."
+        },
+        {
+          "role": "Ministry of External Affairs",
+          "platform": "X",
+          "handle": "@MEAIndia",
+          "url": "https://x.com/MEAIndia",
+          "verification_hint": "Verify through MEA official website."
+        }
+      ],
+      "supplementary_sources": {
+        "purpose": "RAG and agent differentiation; prioritize MEA, PMO, and India Code for policy and legal grounding.",
+        "official_websites": [
+          {
+            "category": "Foreign Ministry",
+            "name": "Ministry of External Affairs",
+            "url": "https://www.mea.gov.in/",
+            "content_use": "Press releases, briefings, foreign policy statements"
+          },
+          {
+            "category": "Executive",
+            "name": "PMO India",
+            "url": "https://www.pmindia.gov.in/en/",
+            "content_use": "Speeches, official messaging, policy announcements"
+          },
+          {
+            "category": "Law",
+            "name": "India Code",
+            "url": "https://www.indiacode.nic.in/",
+            "content_use": "Acts, rules, and legal references"
+          }
+        ],
+        "official_multimedia": [
+          "PMO and MEA speech videos and official transcripts"
+        ],
+        "news_wires": [
+          "Reuters, PTI, AP for chronology and verification"
+        ],
+        "interviews_and_transcripts": [
+          "PM speeches and official press interactions",
+          "MEA spokesperson briefings and statements"
+        ],
+        "laws_and_regulations": [
+          {
+            "topic": "India Code",
+            "url": "https://www.indiacode.nic.in/",
+            "notes": "Useful for foreign trade, digital, and security-related legal context"
+          }
+        ],
+        "rag_tiers": {
+          "tier_a_primary": [
+            "mea.gov.in",
+            "pmindia.gov.in",
+            "indiacode.nic.in"
+          ],
+          "tier_b_secondary": [
+            "Wires quoting Indian officials verbatim"
+          ],
+          "tier_c_social": [
+            "Social posts for timing and framing only"
+          ]
+        }
+      },
+      "decision_style": {
+        "aggressiveness": "medium",
+        "risk_tolerance": "medium",
+        "diplomacy_preference": "high"
+      }
+    },
+    {
+      "country": "North Korea",
+      "region": "Asia",
+      "leader": {
+        "name": "Kim Jong Un",
+        "title": "Supreme Leader"
+      },
+      "recent_events": [
+        {
+          "event": "Continued missile and weapons development with repeated signaling toward regional adversaries",
+          "type": "military",
+          "impact_level": "high",
+          "impact": "Increases crisis volatility in Northeast Asia"
+        },
+        {
+          "event": "Expanded diplomatic and military coordination with selected partners while remaining under sanctions pressure",
+          "type": "diplomatic",
+          "impact_level": "medium",
+          "impact": "Offsets isolation through selective alignment"
+        },
+        {
+          "event": "Persistent economic strain under sanctions and limited trade access",
+          "type": "economic",
+          "impact_level": "high",
+          "impact": "Incentivizes coercive signaling and illicit channels"
+        }
+      ],
+      "official_statements": [
+        {
+          "source": "government",
+          "content": "Official messaging frames nuclear and missile programs as legitimate self-defense against hostile external forces.",
+          "tone": "aggressive"
+        },
+        {
+          "source": "press",
+          "content": "State media narratives stress deterrence, regime strength, and readiness to respond forcefully to allied exercises and pressure.",
+          "tone": "aggressive"
+        }
+      ],
+      "core_interests": [
+        "Regime survival and internal control",
+        "Strategic deterrent development",
+        "Sanctions evasion and resource access"
+      ],
+      "red_lines": [
+        "Perceived decapitation strike threat to leadership command structure",
+        "Actions interpreted as immediate regime-change preparation"
+      ],
+      "alliances": [],
+      "enemies": [
+        "United States",
+        "South Korea",
+        "Japan"
+      ],
+      "neutral_relations": [
+        "China",
+        "Russia"
+      ],
+      "official_social_channels": [],
+      "supplementary_sources": {
+        "purpose": "RAG and agent differentiation; primary sources are state media and official DPRK narratives, separated clearly from external verification.",
+        "official_websites": [
+          {
+            "category": "State media",
+            "name": "KCNA",
+            "url": "http://www.kcna.kp/",
+            "content_use": "Official state statements and leadership narratives"
+          }
+        ],
+        "official_multimedia": [
+          "Official DPRK state media releases when publicly distributed"
+        ],
+        "news_wires": [
+          "Reuters, AP, Yonhap for verification and external context"
+        ],
+        "interviews_and_transcripts": [
+          "Leader speeches and party readouts as published by state media"
+        ],
+        "laws_and_regulations": [
+          {
+            "topic": "UN Security Council sanctions regime",
+            "url": "https://www.un.org/securitycouncil/sanctions/1718",
+            "notes": "Essential for modeling external constraint environment"
+          }
+        ],
+        "rag_tiers": {
+          "tier_a_primary": [
+            "KCNA official releases"
+          ],
+          "tier_b_secondary": [
+            "UN sanctions pages and major wires"
+          ],
+          "tier_c_social": [
+            "Avoid unverified social content"
+          ]
+        }
+      },
+      "decision_style": {
+        "aggressiveness": "high",
+        "risk_tolerance": "high",
+        "diplomacy_preference": "low"
+      }
+    },
+    {
+      "country": "Russia",
+      "region": "Europe",
+      "leader": {
+        "name": "Vladimir Putin",
+        "title": "President"
+      },
+      "recent_events": [
+        {
+          "event": "Continued war operations and defense-industrial mobilization linked to the conflict in Ukraine",
+          "type": "military",
+          "impact_level": "high",
+          "impact": "Sustains high-intensity confrontation with the West"
+        },
+        {
+          "event": "Sustained Western sanctions pressure and expansion of non-Western trade channels",
+          "type": "economic",
+          "impact_level": "high",
+          "impact": "Reorients trade and finance flows"
+        },
+        {
+          "event": "Closer coordination with Iran, China, and selected Global South partners",
+          "type": "diplomatic",
+          "impact_level": "medium",
+          "impact": "Builds alternative political-economic linkages"
+        }
+      ],
+      "official_statements": [
+        {
+          "source": "government",
+          "content": "Moscow frames Western sanctions and NATO policies as destabilizing and positions Russian actions as defensive and necessary for national security.",
+          "tone": "defensive"
+        },
+        {
+          "source": "leader",
+          "content": "The leadership stresses strategic endurance, sovereignty, and readiness to bear long-term costs to achieve security objectives.",
+          "tone": "aggressive"
+        }
+      ],
+      "core_interests": [
+        "Regime security and domestic stability",
+        "Strategic depth and deterrence near its borders",
+        "Sanctions resilience and great-power status"
+      ],
+      "red_lines": [
+        "Direct large-scale military reversal threatening core regime survival narratives",
+        "Perceived external efforts to fracture territorial control"
+      ],
+      "alliances": [],
+      "enemies": [],
+      "neutral_relations": [
+        "China",
+        "India",
+        "Saudi Arabia",
+        "Singapore",
+        "Israel",
+        "Iran"
+      ],
+      "official_social_channels": [
+        {
+          "role": "Ministry of Foreign Affairs",
+          "platform": "X",
+          "handle": "@mfa_russia",
+          "url": "https://x.com/mfa_russia",
+          "verification_hint": "Verify through MFA website and embassy pages."
+        }
+      ],
+      "supplementary_sources": {
+        "purpose": "RAG and agent differentiation; prioritize official Kremlin and MFA texts, and tag language for Russian/English content.",
+        "official_websites": [
+          {
+            "category": "Executive",
+            "name": "President of Russia",
+            "url": "http://en.kremlin.ru/",
+            "content_use": "Speeches, decrees, readouts, press conferences"
+          },
+          {
+            "category": "Foreign Ministry",
+            "name": "Russian MFA",
+            "url": "https://mid.ru/en/",
+            "content_use": "Statements, briefings, diplomatic readouts"
+          }
+        ],
+        "official_multimedia": [
+          "Kremlin and MFA video statements and transcripts when officially posted"
+        ],
+        "news_wires": [
+          "Reuters, AP, AFP for chronology and external verification"
+        ],
+        "interviews_and_transcripts": [
+          "Kremlin press conferences and national addresses",
+          "MFA spokesperson briefings and official readouts"
+        ],
+        "laws_and_regulations": [
+          {
+            "topic": "Presidential decrees and legal acts",
+            "url": "http://en.kremlin.ru/",
+            "notes": "Useful for wartime governance and domestic policy changes"
+          },
+          {
+            "topic": "External sanctions regimes",
+            "url": "https://ofac.treasury.gov/",
+            "notes": "Model constraint environment separately from Russian primary sources"
+          }
+        ],
+        "rag_tiers": {
+          "tier_a_primary": [
+            "en.kremlin.ru",
+            "mid.ru/en"
+          ],
+          "tier_b_secondary": [
+            "Major wires quoting officials verbatim"
+          ],
+          "tier_c_social": [
+            "Social posts for timing and tone only"
+          ]
+        }
+      },
+      "decision_style": {
+        "aggressiveness": "high",
+        "risk_tolerance": "high",
+        "diplomacy_preference": "low"
+      }
+    },
+    {
+      "country": "South Korea",
+      "region": "Asia",
+      "leader": {
+        "name": "Han Duck-soo",
+        "title": "Acting President and Prime Minister"
+      },
+      "recent_events": [
+        {
+          "event": "Sustained deterrence posture and military readiness in response to North Korean missile activity",
+          "type": "military",
+          "impact_level": "high",
+          "impact": "Raises readiness tempo and alliance coordination needs"
+        },
+        {
+          "event": "Closer trilateral security coordination with the United States and Japan",
+          "type": "diplomatic",
+          "impact_level": "high",
+          "impact": "Strengthens collective deterrence architecture"
+        },
+        {
+          "event": "Continued emphasis on semiconductor, battery, and export-oriented economic security",
+          "type": "economic",
+          "impact_level": "medium",
+          "impact": "Protects strategic industrial competitiveness"
+        }
+      ],
+      "official_statements": [
+        {
+          "source": "government",
+          "content": "Seoul stresses alliance coordination, readiness, and deterrence against North Korean threats.",
+          "tone": "defensive"
+        },
+        {
+          "source": "ministry",
+          "content": "Foreign policy messaging emphasizes rules-based order, diplomatic coordination, and sanctions implementation.",
+          "tone": "diplomatic"
+        }
+      ],
+      "core_interests": [
+        "Deterrence against North Korea",
+        "Alliance credibility with the United States",
+        "Economic security in advanced manufacturing and exports"
+      ],
+      "red_lines": [
+        "Large-scale North Korean strike against South Korean population centers",
+        "Breakdown of deterrence credibility that invites rapid escalation"
+      ],
+      "alliances": [
+        "United States"
+      ],
+      "enemies": [
+        "North Korea"
+      ],
+      "neutral_relations": [
+        "Japan",
+        "China",
+        "Singapore",
+        "India"
+      ],
+      "official_social_channels": [
+        {
+          "role": "Ministry of Foreign Affairs",
+          "platform": "X",
+          "handle": "@MOFAKorea_EN",
+          "url": "https://x.com/MOFAKorea_EN",
+          "verification_hint": "Verify on MOFA Korea official website."
+        },
+        {
+          "role": "Ministry of National Defense",
+          "platform": "X",
+          "handle": "@ROK_MND",
+          "url": "https://x.com/ROK_MND",
+          "verification_hint": "Verify on defense ministry official pages."
+        }
+      ],
+      "supplementary_sources": {
+        "purpose": "RAG and agent differentiation; prioritize MOFA, MND, and official executive communications.",
+        "official_websites": [
+          {
+            "category": "Foreign Ministry",
+            "name": "MOFA Korea",
+            "url": "https://www.mofa.go.kr/eng/index.do",
+            "content_use": "Statements, briefings, foreign policy positions"
+          },
+          {
+            "category": "Defense",
+            "name": "Ministry of National Defense",
+            "url": "https://www.mnd.go.kr/eng/",
+            "content_use": "Defense updates, briefings, deterrence posture"
+          }
+        ],
+        "official_multimedia": [
+          "Official government and ministry briefing videos and transcripts"
+        ],
+        "news_wires": [
+          "Yonhap English, Reuters for verification and chronology"
+        ],
+        "interviews_and_transcripts": [
+          "MOFA press briefings and official statements",
+          "Defense ministry briefings"
+        ],
+        "laws_and_regulations": [
+          {
+            "topic": "Korean legal database",
+            "url": "https://elaw.klri.re.kr/eng_service/main.do",
+            "notes": "For legal and regulatory references in English"
+          }
+        ],
+        "rag_tiers": {
+          "tier_a_primary": [
+            "mofa.go.kr/eng",
+            "mnd.go.kr/eng"
+          ],
+          "tier_b_secondary": [
+            "Wires quoting South Korean officials verbatim"
+          ],
+          "tier_c_social": [
+            "Social posts for alerts and timing only"
+          ]
+        }
+      },
+      "decision_style": {
+        "aggressiveness": "medium",
+        "risk_tolerance": "medium",
+        "diplomacy_preference": "high"
+      }
+    },
+    {
+      "country": "Taiwan",
+      "region": "Asia",
+      "leader": {
+        "name": "Lai Ching-te",
+        "title": "President"
+      },
+      "recent_events": [
+        {
+          "event": "Sustained military and gray-zone pressure from China around the Taiwan Strait",
+          "type": "military",
+          "impact_level": "high",
+          "impact": "Maintains persistent coercive pressure environment"
+        },
+        {
+          "event": "Expanded civil resilience and defense readiness initiatives",
+          "type": "political",
+          "impact_level": "medium",
+          "impact": "Improves continuity under crisis scenarios"
+        },
+        {
+          "event": "Continued semiconductor diplomacy and supply-chain partnerships with major economies",
+          "type": "economic",
+          "impact_level": "high",
+          "impact": "Preserves strategic global relevance"
+        }
+      ],
+      "official_statements": [
+        {
+          "source": "leader",
+          "content": "The government emphasizes maintaining the status quo, strengthening democratic resilience, and enhancing deterrence.",
+          "tone": "defensive"
+        },
+        {
+          "source": "ministry",
+          "content": "Taiwan opposes coercion and calls for international support for peace and stability across the Taiwan Strait.",
+          "tone": "diplomatic"
+        }
+      ],
+      "core_interests": [
+        "Preserving de facto autonomy",
+        "Strengthening deterrence and civil resilience",
+        "Protecting semiconductor and supply-chain relevance"
+      ],
+      "red_lines": [
+        "Large-scale coercive blockade or forced unification attempt",
+        "Sustained kinetic attacks against critical civil infrastructure"
+      ],
+      "alliances": [],
+      "enemies": [],
+      "neutral_relations": [
+        "United States",
+        "Japan",
+        "Singapore",
+        "India"
+      ],
+      "official_social_channels": [
+        {
+          "role": "President",
+          "platform": "X",
+          "handle": "@ChingteLai",
+          "url": "https://x.com/ChingteLai",
+          "verification_hint": "Verify through the Office of the President official site."
+        },
+        {
+          "role": "Ministry of Foreign Affairs",
+          "platform": "X",
+          "handle": "@MOFA_Taiwan",
+          "url": "https://x.com/MOFA_Taiwan",
+          "verification_hint": "Verify through MOFA Taiwan official pages."
+        }
+      ],
+      "supplementary_sources": {
+        "purpose": "RAG and agent differentiation; prioritize official presidential, foreign ministry, and defense releases in English.",
+        "official_websites": [
+          {
+            "category": "Executive",
+            "name": "Office of the President",
+            "url": "https://english.president.gov.tw/",
+            "content_use": "Speeches, readouts, official statements"
+          },
+          {
+            "category": "Foreign Ministry",
+            "name": "MOFA Taiwan",
+            "url": "https://en.mofa.gov.tw/",
+            "content_use": "Press releases, policy statements"
+          },
+          {
+            "category": "Defense",
+            "name": "Ministry of National Defense",
+            "url": "https://english.mnd.gov.tw/",
+            "content_use": "Defense briefings, military developments"
+          }
+        ],
+        "official_multimedia": [
+          "Official presidential and ministry videos and transcripts when posted"
+        ],
+        "news_wires": [
+          "Reuters, AP, BBC for cross-strait and international context"
+        ],
+        "interviews_and_transcripts": [
+          "Presidential addresses and interviews with official transcripts",
+          "Defense and foreign affairs press briefings"
+        ],
+        "laws_and_regulations": [
+          {
+            "topic": "Taiwan Laws and Regulations Database",
+            "url": "https://law.moj.gov.tw/ENG/",
+            "notes": "Use for defense, civil resilience, and legal updates"
+          }
+        ],
+        "rag_tiers": {
+          "tier_a_primary": [
+            "english.president.gov.tw",
+            "en.mofa.gov.tw",
+            "english.mnd.gov.tw"
+          ],
+          "tier_b_secondary": [
+            "Wires quoting Taiwanese officials verbatim"
+          ],
+          "tier_c_social": [
+            "Social posts for signaling and timing only"
+          ]
+        }
+      },
+      "decision_style": {
+        "aggressiveness": "low",
+        "risk_tolerance": "medium",
+        "diplomacy_preference": "high"
+      }
+    },
+    {
+      "country": "United Kingdom",
+      "region": "Europe",
+      "leader": {
+        "name": "Keir Starmer",
+        "title": "Prime Minister"
+      },
+      "recent_events": [
+        {
+          "event": "Continued military and diplomatic support for Ukraine with NATO partners",
+          "type": "diplomatic",
+          "impact_level": "high",
+          "impact": "Reinforces transatlantic deterrence signaling"
+        },
+        {
+          "event": "Middle East crisis diplomacy focused on de-escalation and maritime security",
+          "type": "diplomatic",
+          "impact_level": "medium",
+          "impact": "Protects shipping lanes and crisis management channels"
+        },
+        {
+          "event": "Domestic fiscal and economic pressures shaping defense and foreign policy capacity",
+          "type": "economic",
+          "impact_level": "medium",
+          "impact": "Constrains resource-intensive external commitments"
+        }
+      ],
+      "official_statements": [
+        {
+          "source": "government",
+          "content": "The UK emphasizes NATO unity, support for Ukraine, and the defense of the rules-based international order.",
+          "tone": "diplomatic"
+        },
+        {
+          "source": "press",
+          "content": "Official messaging stresses de-escalation in the Middle East while protecting shipping lanes and regional stability.",
+          "tone": "defensive"
+        }
+      ],
+      "core_interests": [
+        "European and transatlantic security",
+        "Protection of maritime trade routes",
+        "Maintaining diplomatic influence and domestic stability"
+      ],
+      "red_lines": [
+        "Major attack on UK territory or critical maritime lifelines",
+        "Strategic collapse of NATO collective deterrence credibility"
+      ],
+      "alliances": [
+        "United States"
+      ],
+      "enemies": [],
+      "neutral_relations": [
+        "India",
+        "Saudi Arabia",
+        "Singapore",
+        "Israel"
+      ],
+      "official_social_channels": [
+        {
+          "role": "Prime Minister",
+          "platform": "X",
+          "handle": "@Keir_Starmer",
+          "url": "https://x.com/Keir_Starmer",
+          "verification_hint": "Verify through UK government social pages."
+        },
+        {
+          "role": "10 Downing Street",
+          "platform": "X",
+          "handle": "@10DowningStreet",
+          "url": "https://x.com/10DowningStreet",
+          "verification_hint": "Primary source for PMO statements."
+        },
+        {
+          "role": "Foreign, Commonwealth & Development Office",
+          "platform": "X",
+          "handle": "@FCDOGovUK",
+          "url": "https://x.com/FCDOGovUK",
+          "verification_hint": "Verify on GOV.UK department page."
+        }
+      ],
+      "supplementary_sources": {
+        "purpose": "RAG and agent differentiation; prioritize GOV.UK statements, FCDO releases, and parliamentary records.",
+        "official_websites": [
+          {
+            "category": "Executive",
+            "name": "10 Downing Street",
+            "url": "https://www.gov.uk/government/organisations/prime-ministers-office-10-downing-street",
+            "content_use": "PM speeches, statements, readouts"
+          },
+          {
+            "category": "Foreign Ministry",
+            "name": "FCDO",
+            "url": "https://www.gov.uk/government/organisations/foreign-commonwealth-development-office",
+            "content_use": "Foreign policy statements, sanctions, travel advice"
+          },
+          {
+            "category": "Parliament",
+            "name": "UK Parliament",
+            "url": "https://www.parliament.uk/",
+            "content_use": "Hansard debates, committee hearings"
+          }
+        ],
+        "official_multimedia": [
+          "Government videos and official speech transcripts hosted on GOV.UK"
+        ],
+        "news_wires": [
+          "Reuters, BBC, AP for timeline and external framing"
+        ],
+        "interviews_and_transcripts": [
+          "PM and Foreign Secretary speeches and interviews on GOV.UK",
+          "Parliamentary testimony and official debates"
+        ],
+        "laws_and_regulations": [
+          {
+            "topic": "UK sanctions regulations",
+            "url": "https://www.gov.uk/government/collections/uk-sanctions",
+            "notes": "Primary source for sanctions changes"
+          },
+          {
+            "topic": "Bills and legislation tracker",
+            "url": "https://bills.parliament.uk/",
+            "notes": "For security and foreign policy legislation"
+          }
+        ],
+        "rag_tiers": {
+          "tier_a_primary": [
+            "gov.uk statements",
+            "uk sanctions pages",
+            "parliament records"
+          ],
+          "tier_b_secondary": [
+            "Wires quoting UK officials verbatim"
+          ],
+          "tier_c_social": [
+            "Social posts for rapid messaging only"
+          ]
+        }
+      },
+      "decision_style": {
+        "aggressiveness": "medium",
+        "risk_tolerance": "medium",
+        "diplomacy_preference": "high"
+      }
+    },
+    {
       "country": "New Zealand",
       "region": "Oceania",
       "leader": {
@@ -1527,144 +2492,254 @@
       "type": "hostile"
     },
     {
-      "from": "United States",
-      "to": "Canada",
-      "type": "ally"
-    },
-    {
-      "from": "United States",
-      "to": "Japan",
-      "type": "ally"
-    },
-    {
-      "from": "United States",
-      "to": "Australia",
-      "type": "ally"
-    },
-    {
-      "from": "United States",
-      "to": "Philippines",
-      "type": "ally"
-    },
-    {
-      "from": "United States",
-      "to": "Germany",
-      "type": "ally"
-    },
-    {
-      "from": "United States",
-      "to": "France",
-      "type": "ally"
-    },
-    {
-      "from": "United States",
-      "to": "Brazil",
-      "type": "economic_partner"
-    },
-    {
-      "from": "United States",
-      "to": "New Zealand",
-      "type": "ally"
-    },
-    {
-      "from": "China",
-      "to": "Philippines",
-      "type": "hostile"
-    },
-    {
-      "from": "China",
-      "to": "Japan",
-      "type": "hostile"
-    },
-    {
-      "from": "China",
-      "to": "Australia",
-      "type": "economic_partner"
-    },
-    {
-      "from": "China",
-      "to": "Brazil",
-      "type": "economic_partner"
-    },
-    {
-      "from": "China",
-      "to": "South Africa",
-      "type": "economic_partner"
-    },
-    {
-      "from": "China",
-      "to": "Nigeria",
-      "type": "economic_partner"
-    },
-    {
-      "from": "China",
-      "to": "Argentina",
-      "type": "economic_partner"
-    },
-    {
-      "from": "Japan",
-      "to": "Australia",
-      "type": "ally"
-    },
-    {
-      "from": "Japan",
-      "to": "Philippines",
-      "type": "ally"
-    },
-    {
-      "from": "Japan",
-      "to": "Singapore",
-      "type": "economic_partner"
-    },
-    {
-      "from": "Germany",
-      "to": "France",
-      "type": "ally"
-    },
-    {
-      "from": "Germany",
-      "to": "China",
-      "type": "economic_partner"
-    },
-    {
       "from": "France",
-      "to": "Nigeria",
-      "type": "economic_partner"
-    },
-    {
-      "from": "Australia",
-      "to": "New Zealand",
-      "type": "ally"
-    },
-    {
-      "from": "Australia",
-      "to": "Singapore",
-      "type": "economic_partner"
-    },
-    {
-      "from": "Brazil",
-      "to": "South Africa",
-      "type": "economic_partner"
-    },
-    {
-      "from": "Brazil",
-      "to": "Argentina",
-      "type": "economic_partner"
-    },
-    {
-      "from": "South Africa",
-      "to": "Nigeria",
-      "type": "economic_partner"
-    },
-    {
-      "from": "Iran",
-      "to": "Philippines",
+      "to": "United States",
       "type": "neutral"
     },
     {
-      "from": "Iran",
+      "from": "France",
+      "to": "India",
+      "type": "neutral"
+    },
+    {
+      "from": "France",
+      "to": "Saudi Arabia",
+      "type": "neutral"
+    },
+    {
+      "from": "France",
+      "to": "Singapore",
+      "type": "neutral"
+    },
+    {
+      "from": "France",
+      "to": "Israel",
+      "type": "neutral"
+    },
+    {
+      "from": "India",
+      "to": "United States",
+      "type": "neutral"
+    },
+    {
+      "from": "India",
+      "to": "Russia",
+      "type": "neutral"
+    },
+    {
+      "from": "India",
+      "to": "Saudi Arabia",
+      "type": "neutral"
+    },
+    {
+      "from": "India",
+      "to": "Singapore",
+      "type": "neutral"
+    },
+    {
+      "from": "India",
+      "to": "Israel",
+      "type": "neutral"
+    },
+    {
+      "from": "India",
+      "to": "Iran",
+      "type": "neutral"
+    },
+    {
+      "from": "India",
+      "to": "China",
+      "type": "neutral"
+    },
+    {
+      "from": "Japan",
+      "to": "United States",
+      "type": "ally"
+    },
+    {
+      "from": "Japan",
+      "to": "South Korea",
+      "type": "neutral"
+    },
+    {
+      "from": "Japan",
+      "to": "India",
+      "type": "neutral"
+    },
+    {
+      "from": "Japan",
+      "to": "Singapore",
+      "type": "neutral"
+    },
+    {
+      "from": "Japan",
+      "to": "Saudi Arabia",
+      "type": "neutral"
+    },
+    {
+      "from": "Japan",
+      "to": "Israel",
+      "type": "neutral"
+    },
+    {
+      "from": "North Korea",
+      "to": "United States",
+      "type": "hostile"
+    },
+    {
+      "from": "North Korea",
+      "to": "South Korea",
+      "type": "hostile"
+    },
+    {
+      "from": "North Korea",
       "to": "Japan",
-      "type": "economic_partner"
+      "type": "hostile"
+    },
+    {
+      "from": "North Korea",
+      "to": "China",
+      "type": "neutral"
+    },
+    {
+      "from": "North Korea",
+      "to": "Russia",
+      "type": "neutral"
+    },
+    {
+      "from": "Philippines",
+      "to": "United States",
+      "type": "ally"
+    },
+    {
+      "from": "Philippines",
+      "to": "China",
+      "type": "neutral"
+    },
+    {
+      "from": "Philippines",
+      "to": "Japan",
+      "type": "neutral"
+    },
+    {
+      "from": "Philippines",
+      "to": "Singapore",
+      "type": "neutral"
+    },
+    {
+      "from": "Philippines",
+      "to": "India",
+      "type": "neutral"
+    },
+    {
+      "from": "Philippines",
+      "to": "Saudi Arabia",
+      "type": "neutral"
+    },
+    {
+      "from": "Russia",
+      "to": "China",
+      "type": "neutral"
+    },
+    {
+      "from": "Russia",
+      "to": "India",
+      "type": "neutral"
+    },
+    {
+      "from": "Russia",
+      "to": "Saudi Arabia",
+      "type": "neutral"
+    },
+    {
+      "from": "Russia",
+      "to": "Singapore",
+      "type": "neutral"
+    },
+    {
+      "from": "Russia",
+      "to": "Israel",
+      "type": "neutral"
+    },
+    {
+      "from": "Russia",
+      "to": "Iran",
+      "type": "neutral"
+    },
+    {
+      "from": "South Korea",
+      "to": "United States",
+      "type": "ally"
+    },
+    {
+      "from": "South Korea",
+      "to": "North Korea",
+      "type": "hostile"
+    },
+    {
+      "from": "South Korea",
+      "to": "Japan",
+      "type": "neutral"
+    },
+    {
+      "from": "South Korea",
+      "to": "China",
+      "type": "neutral"
+    },
+    {
+      "from": "South Korea",
+      "to": "Singapore",
+      "type": "neutral"
+    },
+    {
+      "from": "South Korea",
+      "to": "India",
+      "type": "neutral"
+    },
+    {
+      "from": "Taiwan",
+      "to": "United States",
+      "type": "neutral"
+    },
+    {
+      "from": "Taiwan",
+      "to": "Japan",
+      "type": "neutral"
+    },
+    {
+      "from": "Taiwan",
+      "to": "Singapore",
+      "type": "neutral"
+    },
+    {
+      "from": "Taiwan",
+      "to": "India",
+      "type": "neutral"
+    },
+    {
+      "from": "United Kingdom",
+      "to": "United States",
+      "type": "ally"
+    },
+    {
+      "from": "United Kingdom",
+      "to": "India",
+      "type": "neutral"
+    },
+    {
+      "from": "United Kingdom",
+      "to": "Saudi Arabia",
+      "type": "neutral"
+    },
+    {
+      "from": "United Kingdom",
+      "to": "Singapore",
+      "type": "neutral"
+    },
+    {
+      "from": "United Kingdom",
+      "to": "Israel",
+      "type": "neutral"
     }
   ]
 }
